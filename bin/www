@@ -1,0 +1,18 @@
+#!/usr/bin/env node
+// Esto es un archivo javascript, aunque indica el path para node con comando del shell
+// Si pongo comentario encima no entiende el código # -- unexpected token illegal
+//carga el modulo node debug con el nombre de la aplicacion
+// debug sirve para enviar mensajes a la consola desde la aplicacion
+var debug = require('debug')('rafaQuiz');
+
+// Asigna a la variable app el archivo app.js
+var app = require('../app');
+
+// configura el puerto 3000 en el entorno (local) de la aplicacion app
+app.set('port', process.env.PORT || 3000);
+
+// prepara la aplicacion para recibir peticiones a traves del puerto
+// y envia mensaje a traves de debug ( yo no veo ese mensaje en ningun lado, puede que por hacerlo con visual)
+var server = app.listen(app.get('port'), function() {
+  debug('Express server listening on port ' + server.address().port);
+});

@@ -1,0 +1,12 @@
+#TIPOS ARCHIVO
+*.njsproj
+*.njsperf
+*.sln
+*.dll
+*.log
+#CARPETAS
+.vs
+node_modules
+obj
+#ARCHIVOS CONCRETOS
+.ntvs_analysis.dat

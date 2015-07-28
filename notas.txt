@@ -1,0 +1,99 @@
+rafaQuiz
+
+Ejercicio Miriadax Curso 2
+Desarrollo de servicios en la nube con HTML5, Javascript y node.js
+
+Módulo 6 en adelante.
+
+licencia:MIT
+
+-------------------------------------------------------------------------------------------
+Aquí haré un historial con todo lo que vaya haciendo y los problemas que me encuentre y (espero) sus soluciones
+los problemas los marcare con *
+-------------------------------------------------------------------------------------------
+ANTES DE EMPEZAR.
+
+    - Precedentes:
+
+        Tuve algunos problemas haciendo la aplicación, y no se cuantos fallos arrastre, pues no siempre
+        sabia lo que hacia, asi que decidi empezar de nuevo, controlándolo todo mejor, incluidos mensajes de error en heroku log.
+
+        Por mencionar algunos problemas que tuve, por si le es util a alguien, o alguien vio este
+        repositorio, dejo los fallos que encontré y como los solucione.
+
+            *FALLOS VERSION ANTERIOR(ELIMINADA)
+
+                CORREGIDOS
+
+                    - Procfile tenia un caracter invisible por guardarlo como utf con dom. y hacia que foreman no ejecutase.
+                    - models.js tenia repetido Quiz.create
+                    - router/index.js repetia get author
+                    - el favicon no salia - cambie formato de png a ico y ok
+                    - En un momento dado subi la carpeta como Models y debia ser models.
+                            No fui capaz de cambiarlo en windows ni con git mv Model model.
+                            En local estaba ok, pero los cambios no los reconocia al subirlos a github
+                        Consegui corregirlo haciendo el commit desde linux y subiendolo desde alli.
+                        Hice un monton de commits de más intentandolo.
+
+                SIN CORREGIR
+                      - Estado: adaptado a heroku y funcionando en local.
+
+                    - Al subir posgres dejo de funcionar en heroku. porque no encontraba models.
+	                  Puede que fuera por lo de la carpeta Models y solo se arreglara en github
+        	          y no en heroku.
+
+                    - El dashboard de heroku siempre me decia que el dyno estaba sleepin y no se
+                      si era porque no funcionaba o por el fallo de la página.
+                       
+    				- Tambien me daba un fallo segun heroku log al cargar /author,
+	    			  Le habia puesto variable para titulo, como con index, y la pagina se creaba ok,
+                   	  pero en heroku logs salia como que <%=title%>(en layout.ejs) no estaba definido
+ 
+                      Sin embargo con index no daba problemas y lo copie tal cual. Ademas cargaba ok
+                      el titulo distinto cuando cargaba la página.
+
+EMPEZANDO
+
+        Uso normalmente windows 8.1 para programar con el entorno visual studio community.
+        También Sublime o Code(o vsCode) para archivos individuales o por contrastar.
+         En el Visual tengo añadido nodejs tools, ya instalé git bash y heroku.
+
+        Tambien uso una máquina virtual debian desde el windows con hiper-v y un mini pc con linux poppy,
+         con git y heroku también, para hacer cosas fuera de casa.
+         
+        En vs community hay varias plantillas para hacer aplicaciones con o sin express 3 o 4.
+        En las transparencias de los módulos, recomiendan usar las versiones del curso y
+        usan partials(con ejs) en lugar de jade(que es como viene en la plantilla),
+        asi que en principio lo haré según el curso.
+---------------------------------------------------------------------------------
+QUIZ 1 CREACION DEL ESQUELETO.
+	- Paso 1. Instalar paquete express-generator
+		- Creo carpeta, inicio git(git init), creo proyecto para visual studio.
+		- Instalo express-generator4.9.0 con npm install express-generator@4.9.0
+			(no creo carpeta nueva, para que solo haya un node_modules, 
+			como generator no esta en package, no se considera parte de la aplicacion y no se instalara con npm install)
+		- Ejecuto express (con path) - se crean app.js,package.json y carpetas segun transparencia
+
+	- Paso 2. Generar esqueleto del proyecto Quiz
+		- Instalo paquetes de package.json agregados con express (npm install)
+		- Añado .gitignore e incluyo archivos de visual y carpeta node_modules
+		- Añado README.md, LICENCE (MIT) y este archivo (notas.txt) QUE IRE ACTUALIZANDO CON CADA COMMIT
+	- Paso 3. Guardar versión (commit) con git
+        -* Hago git add . para añadir los archivos y me avisa que varios archivos se guardaran en git con 
+            otro fin de linea CRLF, pero se mantendran en mi carpeta.
+            Compruebo archivos, varios estan con Europeo occidental (windows)-pagina de codigos 1252
+            y fin de linea windows CRLF.
+            según investigo, es normal, para poder trabajar desde distintos SSOO
+            Los cambio todos a Unicode(UTF-8-sin signatura) de todos modos
+        - Ejecuto con npm start y funciona ok en http://localhost:3000/ -- > página express
+        - Añado comentarios a todos los archivos de código para indicar que hacen  
+           y a mensajes de error, para saber de donde vienen.     
+        - commit -m "Esqueleto del proyecto rafaquiz con express-generator" ok
+
+QUIZ 2 PRIMERA PAGINA Y FAVICON
+
+    - Paso 1. Se transforma la página de entrada GET/, en página bienvenida del portal.
+        - Modifico routes/index.js. Cambio el valor de la variable title de 
+    - Paso 2. Quitamos ruta /users
+    - Paso 3. Añadimos favicon
+    - Paso 4. Guardamos versión
