@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+    <meta charset="utf-8" />
+    <title>rafaQuiz</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="icon" href="/images/logoQuiz.ico" type="image/x-icon" />
+</head>
+<body>
+    <h2>rafaQuiz: El juego de las preguntas</h2>
+    <form method="get" action="/quizes/answer">
+        <p>Pregunta: <%= pregunta %></p>
+        <input type="text" name="respuesta" placeholder="Responda aquí" />
+        <input type="submit" value="Enviar" />
+    </form>
+</body>
+</html>

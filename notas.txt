@@ -108,3 +108,20 @@ QUIZ 2 PRIMERA PAGINA Y FAVICON
         - git add . .Tuve que borrar routes/users.js con git rm routes/users.js para que lo registrase
         - todo ok- git commit -m "Primera página y favicon."
             ok.
+            
+QUIZ 3 PRIMERA PREGUNTA
+
+    -Paso 1. Añadir MVC de pregunta y respuesta
+        a:Crear directorio controllers/ y el archivo controllers/quiz_controller.js
+            -Pues eso. Mas detalles en el código.
+        b:Importar controllers/quiz_controller.js en routes/index.js
+        c:Introducir nuevas rutas en el enrutador routes/index.js: (GET /quizes/question) y (GET /quizes/answer)
+            - Lo mismo. Mas detalles en codigo
+        d:Crear directorio views/quizes con las vistas question.ejs y answer.ejs
+            - Aqui le añado algunas etiquetas a mayores, tanto aqui como en index.ejs 
+    -Paso 2. Añadimos enlace a la pregunta en pagina home.
+            -Sin problemas.
+            - *Compruebo que funciona y el favicon solo sale en la principal - Puse direcc. con \ en vez de / - solucionado
+            - todo funciona ok. 
+    -Paso 3. Guardamos versión.
+            - todo ok- git commit -m "Primera pregunta."
