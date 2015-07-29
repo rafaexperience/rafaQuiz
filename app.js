@@ -7,20 +7,15 @@
 var express = require('express');
 // path- ayuda para montar (uri´s) rutas a archivos o recursos internet
 var path = require('path');
-// serve-favicon- Monta el icono para el titulo de las paginas
-var favicon = require('serve-favicon');
 // morgan- Ayuda para conectarse con permisos (log)
 var logger = require('morgan');
 // Analiza cookies para pasarlas a otro formato
 var cookieParser = require('cookie-parser');
-// Analiza los parametros en body de una solicitud (Ej. formularios web) para recuperar datos
-// ver final modulo 4
+// Analiza los parametros en body de una solicitud (Ej. formularios web) para recuperar datos--ver final modulo 4
 var bodyParser = require('body-parser');
 
-// Gestiona las url pedidas (gets) para devolverle lo que sea
+// conecta con la pagina de inicio /routes/index.ejs
 var routes = require('./routes/index');
-// Controla los accesos registrados
-var users = require('./routes/users');
 
 // "instancia" el modulo en app  !!!!SE PUEDE CONFUNDIR CON app de bin/www que este mismo archivo  
 var app = express();
@@ -29,9 +24,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-// Quitar comentario despues de colocar tu favicon en carpeta public/
-//app.use(favicon(__dirname + '/public/favicon.ico'));
-
+//elimino serve-favicon, por usar otro metodo
 // aplicamos y configuramos los modulos
 app.use(logger('dev')); // supongo que dev sera el usuario que crea la pagina
 app.use(bodyParser.json()); // 
@@ -40,9 +33,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public'))); // devuelve peticiones a recursos que esten en public/
 
 app.use('/', routes); // envia las peticiones a /, a /routes/index.js
-//http://localhost:3000 devuelve "Welcome to Express"
-app.use('/users', users); // envia las peticiones a /, a /routes/users.js
-//http://localhost:3000/users devuelve "respond with a resource
+//http://localhost:3000 devuelve "Welcome to rafaQuiz"
+//http://localhost:3000/users devuelve 404 y muestra pagina error desarrollo
+
 // GESTION DE ERRORES - SI ACCEDE A RECURSOS QUE NO EXISTEN O LA APLICACION-SERVIDOR FALLA
 
 // captura 404 (recurso no encontrado) and envia al manejador de errores con codigo 404

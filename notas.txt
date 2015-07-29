@@ -93,7 +93,18 @@ QUIZ 1 CREACION DEL ESQUELETO.
 QUIZ 2 PRIMERA PAGINA Y FAVICON
 
     - Paso 1. Se transforma la página de entrada GET/, en página bienvenida del portal.
-        - Modifico routes/index.js. Cambio el valor de la variable title de 
+        - Modifico routes/index.js. Cambio el valor de la variable title de "Express" a "RafaQuiz"
     - Paso 2. Quitamos ruta /users
+        - Elimino ruta users - modifico app.js (var=require y use) y borro archivo routes/users.ejs 
     - Paso 3. Añadimos favicon
+        - Para añadir favicon, uso el método desde la cabecera de la página.
+        - Elimino modulo de serve-favicon en package.json, borro la carpeta en node_modules y quito referencias de app.js
+        - Creo icono con paint.net le cambio el tamaño y lo guardo como bmp. Luego le cambio la extension a ico.
+        - Guardo icono en public/images
+        - Añado <link rel="icon" href="\images\logoQuiz.ico" type="image/x-icon" /> en head de index.ejs
+        - Todo ok - solo mensajes get en consola y sale titulo cambiado e icono en http://localhost:3000/
+            * puede que al enviar el css se repita el envio?? - no lo considero problema, pero es curioso.
     - Paso 4. Guardamos versión
+        - git add . .Tuve que borrar routes/users.js con git rm routes/users.js para que lo registrase
+        - todo ok- git commit -m "Primera página y favicon."
+            ok.
