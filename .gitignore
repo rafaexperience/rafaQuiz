@@ -4,9 +4,12 @@
 *.sln
 *.dll
 *.log
+*.db
 #CARPETAS
 .vs
 node_modules
 obj
 #ARCHIVOS CONCRETOS
 .ntvs_analysis.dat
+.ntvs_analysis.dat.tmp
+public/images/Thumbs.db

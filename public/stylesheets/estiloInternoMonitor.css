@@ -1,0 +1,38 @@
+﻿@charset "UTF-8";
+
+body #page-wrap {
+    background: #999;
+    font-size: 22px;
+}
+
+#page-wrap::after {
+    content: "--Diseño ancho--";
+}
+
+#page-wrap nav {
+    float: left;
+    width: 15%;
+}
+
+    #page-wrap nav span {
+        margin: 0 100px 0 0;
+    }
+
+        #page-wrap nav span a {
+            text-align: left;
+            display: block;
+        }
+
+section {
+    float: right;
+    width: 80%;
+}
+
+#page-wrap footer {
+    clear: both;
+    display: block;
+}
+
+#n1 {
+    min-height: 356px;
+}

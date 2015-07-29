@@ -34,7 +34,11 @@ ANTES DE EMPEZAR.
                             En local estaba ok, pero los cambios no los reconocia al subirlos a github
                         Consegui corregirlo haciendo el commit desde linux y subiendolo desde alli.
                         Hice un monton de commits de más intentandolo.
-
+                    - 
+                    - El dashboard de heroku siempre me decia que el dyno estaba sleepin y no cargaba, no se
+                      si era porque no funcionaba o por el fallo de la página.
+                       (Al subir la aplicación de nuevo (sin posgres, por ahora) funciona ok, asi que seria
+                         fallo de aplicación - ver Quiz6).
                 SIN CORREGIR
                       - Estado: adaptado a heroku y funcionando en local.
 
@@ -42,8 +46,6 @@ ANTES DE EMPEZAR.
 	                  Puede que fuera por lo de la carpeta Models y solo se arreglara en github
         	          y no en heroku.
 
-                    - El dashboard de heroku siempre me decia que el dyno estaba sleepin y no se
-                      si era porque no funcionaba o por el fallo de la página.
                        
     				- Tambien me daba un fallo segun heroku log al cargar /author,
 	    			  Le habia puesto variable para titulo, como con index, y la pagina se creaba ok,
@@ -141,3 +143,40 @@ QUIZ 4 MARCO DE LA APLICACION
         - Todo responde ok. reviso codificacion utf y grabo de nuevo error.ejs y layout.ejs
     - Paso 5. Guardar versión.
         - - todo ok- git commit -m "Vistas parciales y marco"
+
+QUIZ 4 DISEÑO WEB ADAPTABLE
+    - Aqui me salto el ejercicio y le pongo el mismo marco que le puse al curso anterior.
+    - Tiene un home a los ejercicios del curso anterior en un servidor gratuito. Se lo incluyo. 
+-----------------PENDIENTE AÑADIR ENLACE A GITHUB EN  http://www.rafaexperience.comocreartuweb.es/----------------------------------
+    - Se adapta bastante bien, aunque hay detalles.
+            -* En pantalla grande el footer no queda abajo (tiene un tamaño minimo, pero en pantallas grandes queda vacio por abajo)
+            -* En pantalla movil. la marca --Diseño Movil--, añadida con css(after), no queda centrada.
+            -* Las preguntas y respuestas salen cutres, pero como va cambiar el sistema ( mas preguntas, comentarios), no lo toco.
+------------------------------------------------------------------------------------------------------------------------------------
+    - Resto ok - Pide los recursos ok, responden los enlaces ok y no veo errores de formato (tildes, o caractéres raros)
+    - git add. añade todo, menos el stylesheet.css original, que se borro. uso git rm <archivo> y ok
+    - aceptamos barco y guardamos. git commit -m "CSS adaptable a móviles y PC´s"
+
+QUIZ 6: DESPLIEGUE EN HEROKU
+    - Elimino la versión subida ( con posgrest ) que no funciona
+        Siempre ponia sleepin.
+        Voy al heroku dashboard y desde settings(abajo de todo) marco delete app..
+    - Le añado el remoto de heroku desde git: heroku git:remote -a rafaquiz
+    - y actualizo git push heroku master
+    - funciona ok en https://rafaquiz.herokuapp.com/.
+    - No añadi Procfile ni cambie package.json y funciona ok en heroku. Según dasboard, ejecuta como: web npm start.
+         Ya no esta sleepin, asi que supongo que era porque la aplicación estaba mal y
+         no llegaba a ejecutarse, por eso  no "despertaba" el dyno.
+    - Tambien clono el repositorio: git clone https://github.com/rafaexperience/rafaQuiz.git
+         y configuro heroku en el portatil: heroku login
+        Añado remoto heroku - git remote add heroku https://git.heroku.com/rafaquiz.git
+        ya puedo hacer heroku logs., pero salen los datos muy confusos.
+        Reviso documentación y con heroku logs --source app --tail, salen mejor y no pierde la conexion.
+    -* Me fijo que el titulo de las páginas esta mal. Compruebo que está mal en las transparencias.
+        Intento poner titulo segun página con routes/index.js o controllers/quiz_controller.js.
+        (Esto me dio problemas en anterior version, con /author)
+        -- rectifique el nombre de la variable <&title&> por <%= title %> y cerre algunas etiquetas con />
+            -el titulo sale ok, pero veo que no sale el favicon, lo dejo como antes y sigue ko.
+            - No sale la petición en logs, pruebo varias cosas y al cambiar el formato a png aparece ok. ¡¡¡???
+            - Parece que ya funciona todo ok.
+    - Lo reenvio a heroku.

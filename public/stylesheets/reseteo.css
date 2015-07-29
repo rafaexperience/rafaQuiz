@@ -1,0 +1,157 @@
+﻿@charset "UTF-8";
+/*AL FINAL AÑÁDIDOS GENERALES DE LA PAGINA - style.css en ejr original*/
+html, body, div, span, object, iframe, video, embed, h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strong, sub, sup, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    vertical-align: baseline;
+    background: transparent;
+    font-size: 18px;
+}
+
+body {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    font-size: 18px;
+    font-size: 100%;
+    line-height: 1;
+}
+
+ol, ul {
+    list-style: none;
+}
+
+blockquote, q {
+    quotes: none;
+}
+
+    blockquote:before, blockquote:after,
+    q:before, q:after {
+        content: '';
+        content: none;
+    }
+/* No olvides definir estilos para focus */
+:focus {
+    outline: 0;
+}
+/* No olvides resaltar de alguna manera el texto insertado/borrado */
+ins {
+    text-decoration: none;
+}
+
+del {
+    text-decoration: line-through;
+}
+/* En el código HTML es necesario añadir cellspacing="0" */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+h1 {
+    font-size: 2em;
+}
+
+h2 {
+    font-size: 1.5em;
+}
+
+h3 {
+    font-size: 1.2em;
+}
+
+a {
+    color: blue;
+}
+
+audio {
+    height: 50px;
+}
+/*Añadidos generales para paginas- style.css en ej original*/
+#page-wrap {
+    margin: 2% auto;
+    color: white;
+    width: 100%;
+}
+
+    #page-wrap > .main {
+        border: 1px solid #999;
+        padding: 1%;
+        margin-bottom: 1px;
+        color: black;
+    }
+
+    #page-wrap section > div {
+        padding: 20px;
+    }
+
+    #page-wrap header,
+    #page-wrap nav,
+    #page-wrap section,
+    #page-wrap footer {
+        background: #eee;
+        text-align: center;
+    }
+
+        #page-wrap nav span {
+            margin: 0 10px 0 0;
+        }
+
+
+#n1 {
+    min-height: 20px;
+}
+
+#s1 {
+    min-height: 350px;
+}
+
+#f1 a {
+    margin: 2px 20px;
+}
+
+    #f1 a img {
+        vertical-align: text-bottom;
+    }
+
+
+
+.ficha {
+    background-color: burlywood;
+    display: flex;
+    padding: 2%;
+    margin: 2%;
+    align-items: center;
+    align-content: space-around;
+}
+
+.fichaitem {
+    height: 90%;
+    width: 30%;
+    margin: 5%;
+}
+
+.nombre {
+    font-size: 25px;
+}
+
+.foto {
+    max-height: 250px;
+    height: auto;
+    width: auto;
+}
+
+.videoin {
+    max-height: 250px;
+    height: 100%;
+    width: 100%;
+}

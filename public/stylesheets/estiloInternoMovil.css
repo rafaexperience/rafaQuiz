@@ -1,0 +1,46 @@
+﻿#page-wrap {
+    background: #333;
+    font-size: xx-large;
+}
+
+    #page-wrap:after {
+        content: "--Diseño Movil--";
+        margin: auto;
+    }
+
+    #page-wrap h2 span, section h3 {
+        display: none;
+    }
+
+    #page-wrap footer, input {
+        font-size: large;
+    }
+
+#f1 a {
+    margin: 2px 20px;
+    display: block;
+}
+
+.ficha {
+    display: block;
+    align-items:center;
+}
+.fichaitem {
+    height: 90%;
+    margin:auto;
+}
+.nombre {
+
+}
+
+.foto {
+  max-height: 200px;
+      margin: 3%;
+}
+.video {margin: 1%;
+}
+.videoin {
+
+    height: 100%;
+    width: 235px;
+}

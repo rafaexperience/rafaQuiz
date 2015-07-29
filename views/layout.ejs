@@ -2,25 +2,71 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es">
 <head>
     <meta charset="utf-8" />
-    <title>Preguntas</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel="icon" href="/images/logoQuiz.ico" type="image/x-icon" />
+    
+    <title><%=title%></title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!-- Reset -->
+    <link href="/stylesheets/reseteo.css" rel="stylesheet" />
+    <!-- Teléfono -->
+    <link href="/stylesheets/miriadaxmovil.css" rel="stylesheet" type="text/css"
+        media="only screen and (max-width:470px)" />
+    <link href="/stylesheets/estiloInternoMovil.css" rel="stylesheet" type="text/css"
+        media="only screen and (max-width:470px)" />
+    <!-- Tableta -->
+    <link href="/stylesheets/miriadaxtablet.css" rel="stylesheet" type="text/css"
+        media="only screen and (min-width:471px) and (max-width:750px)" />
+    <link href="/stylesheets/estiloInternoTablet.css" rel="stylesheet" type="text/css"
+        media="only screen and (min-width:471px) and (max-width:750px)" />
+    <!-- Escritorio -->
+    <link href="/stylesheets/miriadaxmonitor.css" rel="stylesheet" type="text/css"
+        media="only screen and (min-width:751px)" />
+    <link href="/stylesheets/estiloInternoMonitor.css" rel="stylesheet" type="text/css"
+        media="only screen and (min-width:751px)" />
+    <!-- Favicon -->
+    <link href="/images/logoQuiz.png" rel="icon" type="image/x-icon" />
 </head>
 <body>
+    <!--CABECERA MIRIADAX-->
+
+    <header id="cabeceraprinc">
+        <div id="logo">
+            <a href="https://www.miriadax.net/home">
+                <img src="/images/miriada-x_logo_300x90.jpg" alt="logo miriadax" height="45" width="150"/></a>
+        </div>
+        <h1 id="titulohead">Curso 2 Ejercicio QUiZ</h1>
+        <nav id="home">
+            <a href="https://rafaquiz.herokuapp.com/">
+                <div id="conthome">Home</div>
+            </a>
+        </nav>
+    </header>
+    <!--FIN CABECERA-->
+    <!--CONTENIDO PAGINA-->
     <div id="page-wrap">
         <header class="main" id="h1">
-            <h2>rafaQuiz: El juego de las preguntas</h2>
+            <h2>rafaQuiz:<span>El  juego de las preguntas</span></h2>
         </header>
         <nav class="main" id="n1" role="navigation">
             <span><a href="/">Inicio</a></span>
             <span><a href="/quizes/question">Preguntas</a></span>
         </nav>
         <section class="main" id="s1">
-            <%- body %>
+
+            <div>
+                <%- body %>
+            </div>
+
         </section>
         <footer class="main" id="f1">
-            <a href="http://es.wikipedia.org/wiki/Quiz">¿Qué es un quiz?</a>
+            <a href="https://es.wikipedia.org/wiki/Quiz">&#191; Que es un quiz ?</a>
         </footer>
     </div>
+    <!--FIN CONTENIDO-->
+    <!--INICIO PIE MIRIADAX-->
+    <footer id="pieprinc">
+        P&#225;gina creada por Rafael Mart&#237;nez
+    </footer>
+    <!--FIN PIE-->
 </body>
 </html>
