@@ -120,8 +120,24 @@ QUIZ 3 PRIMERA PREGUNTA
         d:Crear directorio views/quizes con las vistas question.ejs y answer.ejs
             - Aqui le añado algunas etiquetas a mayores, tanto aqui como en index.ejs 
     -Paso 2. Añadimos enlace a la pregunta en pagina home.
-            -Sin problemas.
-            - *Compruebo que funciona y el favicon solo sale en la principal - Puse direcc. con \ en vez de / - solucionado
+            - *Sale mal signo admiración, corrigo todas las codificaciones de los archivos nuevos. -- solucionado
+            - *Compruebo que funciona y el favicon solo sale en la principal - Puse direcc. con \ en vez de / -- solucionado
             - todo funciona ok. 
     -Paso 3. Guardamos versión.
             - todo ok- git commit -m "Primera pregunta."
+
+QUIZ 4 MARCO DE LA APLICACION
+    
+    - Paso 1. Instalar express-partials
+        - Instalamos npm install express-partials@0.3.0 --save
+            Se incluye en package.json ok
+    - Paso 2. Aplicar express-partials a app.js
+        - Añado require y app.use de partials a app.js
+    - Paso 3. Añadir marco con <header>, <nav>, <section> y <footer>
+        - creamos el marco layout.ejs en views. Copio el HEAD de index y modifico el titulo - la variable que se le pasa
+        - la variable <%- body &> en <section> es la que tiene el contenido de las otras páginas
+    - Paso 4. Modificar vistas para que salgan en <section>
+        - Borramos <head> y demas del resto de las vistas. index.ejs views/question.ejs y views/answer.ejs
+        - Todo responde ok. reviso codificacion utf y grabo de nuevo error.ejs y layout.ejs
+    - Paso 5. Guardar versión.
+        - - todo ok- git commit -m "Vistas parciales y marco"

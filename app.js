@@ -13,20 +13,23 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 // Analiza los parametros en body de una solicitud (Ej. formularios web) para recuperar datos--ver final modulo 4
 var bodyParser = require('body-parser');
-
+// Permite incluir un marco layout común a todas las páginas
+var partials = require('express-partials');
 // conecta con la pagina de inicio /routes/index.ejs
 var routes = require('./routes/index');
 
 // "instancia" el modulo en app  !!!!SE PUEDE CONFUNDIR CON app de bin/www que este mismo archivo  
 var app = express();
 
-// configura el motor views (Esto es para montar las paginas con ejs)
+// configura el motor views (Esto es para montar las paginas con ejs pasandole variables)
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
-//elimino serve-favicon, por usar otro metodo
+
 // aplicamos y configuramos los modulos
+app.use(partials());
 app.use(logger('dev')); // supongo que dev sera el usuario que crea la pagina
+//elimino serve-favicon, por usar otro metodo
 app.use(bodyParser.json()); // 
 app.use(bodyParser.urlencoded({ extended: false })); // ver final modulo 4. Codifica url´s en utf8
 app.use(cookieParser());
