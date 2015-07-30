@@ -218,3 +218,11 @@ QUIZ 6+: (obl.) ENLACE A GITHUB Y /AUTHOR
                         vacio creditos.ejs - ok¡¡ por aqui van los tiros.
                         En el path de los videos puse video/ en vez de videos/ (tanta guerra por eso.., en fin) -- solucionado
                     - ahora todo ok en local - salen videos, favicon, enlaces,... podrian estar mejor encuadrados, pero vale
+                    - git commit -m "Añadida página créditos GET /author y enlaces". desde rama(branch) créditos.
+                    -  push a github desde creditos - ok;  -push heroku desde creditos ok
+                    -* La página sigue siendo la de master. Conecto heroku con github en Deploy y cambio para que despliegue créditos
+                         Automatic deploys from créditos are enabled ok - pero sigue mostrando la rama master al aplicar
+                         Pruebo con Manual deploy un poco mas abajo, selecciono créditos y marco Deploy Branch y sale como se
+                         actualiza. -- solucionado
+                     - La pruebo y esta ok - aunque veo una raya de enlace por fuera del enlace a wikipedia - corrigo enlace
+                            
