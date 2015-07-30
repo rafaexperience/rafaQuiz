@@ -261,11 +261,13 @@ QUIZ 7 DESPLIEGUE DB EN HEROKU (POSTGRES)
             ok. segun instalacion esta vacia, reinicio la app y configuro la variable DATABASE_URL
             confirmo en heroku dashboard - ok rafaquiz :: database :: knitting-purposefully-2052 y en settings DATABASE_URL OK
         -Paso 3. Modificamos package.json - añadimos devDependencies para modo local con sqlite3 (borramos sqlite3 de dependencies)
-        -Paso 4. Instalo posgresql ok pero aun no pghstore..(hasta que sepa para que..) - ok en package.json
+        -Paso 4. Instalo posgresql ok pero aun no pghstore..(hasta que sepa para que..en pagina postgres con heroku no sale) - ok en package.json
         -Paso 5. Añado variables de entorno. .env (ahora si es obligatorio usar foreman start).
         -Paso 6. Adaptar models.js a postgres - ok
         -Paso 7,8. Comprobamos que funciona en local con foreman - http://localhost:5000/ perfecto y sin mensajes raros
                 Borramos rama créditos (ya mezclada) y creamos una para subir las pruebas y no meter commits de mas.
                 git branch -d créditos; git checkout -b pruebas; push heroku pruebas y cambiamos en dashboard Manual deploy - no sale pruebas - sigue créditos
                     Primero hay que pasar la rama a github, y desde el heroku dashboard se selecciona la rama; push origin pruebas .. y manual deploy - ok
-                    Comprobamos pagina - ko -Aplication Error
+                    -* Comprobamos pagina - ko -Aplication Error - hacemos heroku log --source app --tail :  fallo con el dialecto y no encuentra modulo pg-hstore.
+                        lo instalamos con --save - añadido en package.json ok - commit nuevo en pruebas; git push origin pruebas ok y en heroku manual deploy - añade modulo ok- ; Probamos - sigue ko - ya no sale error pg-hstore, pero
+                          sigue the dialect postgres is not supported. (install pg module manually) reviso package y no esta pg ( no debi poner --save) reinstalo
