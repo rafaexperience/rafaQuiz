@@ -15,3 +15,10 @@ exports.answer = function (req, res) {
     }
     
 };
+
+// GET /author
+//exporta la funcion como quiz_controller.author
+exports.author = function (req, res) {
+    //monta la pagina quizes/question con la pregunta como objeto 
+    res.render("creditos", { title: "Creditos rafaQuiz" });
+};
