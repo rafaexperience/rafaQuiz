@@ -39,6 +39,16 @@ ANTES DE EMPEZAR.
                       si era porque no funcionaba o por el fallo de la página.
                        (Al subir la aplicación de nuevo (sin posgres, por ahora) funciona ok, asi que seria
                          fallo de aplicación - ver Quiz6).
+
+                    - Tambien me daba un fallo segun heroku log al cargar /author,
+	    			  Le habia puesto variable para titulo, como con index, y la pagina se creaba ok,
+                   	  pero en heroku logs salia como que <%=title%>(en layout.ejs) no estaba definido
+                        
+                      Sin embargo con index no daba problemas y lo copie tal cual. Ademas cargaba ok
+                      el titulo distinto cuando cargaba la página.
+                       -- Tenia la direccion de los videos mal - video/.. en vez de videos/.. VER QUIZ 6+:
+
+
                 SIN CORREGIR
                       - Estado: adaptado a heroku y funcionando en local.
 
@@ -47,12 +57,6 @@ ANTES DE EMPEZAR.
         	          y no en heroku.
 
                        
-    				- Tambien me daba un fallo segun heroku log al cargar /author,
-	    			  Le habia puesto variable para titulo, como con index, y la pagina se creaba ok,
-                   	  pero en heroku logs salia como que <%=title%>(en layout.ejs) no estaba definido
- 
-                      Sin embargo con index no daba problemas y lo copie tal cual. Ademas cargaba ok
-                      el titulo distinto cuando cargaba la página.
 
 EMPEZANDO
 
@@ -185,3 +189,47 @@ QUIZ 6: DESPLIEGUE EN HEROKU
         De todos modos intentaré hacer un branch para las pruebas y poder subirlas sin afectar el original.
     - todo ok en heroku.
     - Añado Procfile y módifico package.json (Aunque no hacen falta si no hay variables de entorno)
+    - Compruebo con foreman start- todo ok
+    - git commit -m "Despliegue en la nube (HEROKU)"
+    - git push origin master - - ko (por el commit modificado) - lo fuerzo con -f (fue hace poco, no creo que le importe a nadie) ok.
+    - git push heroku master - ok (ya estaba forzado de antes); - heroku open 
+    - todo ok. titulo segun pagina, favicon en todas y mensages del heroku logs correctos.
+
+QUIZ 6+: (obl.) ENLACE A GITHUB Y /AUTHOR
+    - EJERCICIO P2P Obligatorio
+            - Crear repositorio en github desde 0, siguiendo las instrucciones.
+                Lo que ya hicimos, va.
+            - Crear rama créditos,y desde ella:
+                Modificar servidor para añadir enlace en <footer> del marco (layout) que apunte al proyecto en github
+                    - Modifico views/layout.ejs y le pongo imágenes a los enlaces, por lo mono.
+                    - Creo branch créditos y commit desde ella.
+                Modificar servidor para responder peticiones GET a /author y devuelva una vista
+                 con los autores, su fotografia y un video. Añadir enlace en la barra de navegación a pagina de créditos=/author
+                 Despues integrar los cambios con master y subirlo a github. Cuando este ok, a heroku.
+                    - Añado linea en routes/index.js, que lo manda a quiz_controller.js (como quiz/question) que la monta a partir
+                       de creditos.ejs    (supongo que los créditos se añaden desde bd, mas tarde, por ser varios)
+                    - añado creditos.ejs
+                    -** Compruebo y da error en variable title de layout.ejs (como en versión anterior)
+                        pruebo a desviar con index directo a creditos con titulo - ko - sin titulo - ko - dejo como antes
+                        pruebo a desviar con index a quiz_controller.question con titulo cambiado - ko--
+                            curiosamente no puse el path a question y sigue dando error en variable title, asi que no tiene que ver.
+                            (Se ve que tanto modulo confunde al programa)
+                        La pongo como al principio index.js ->quiz_controller.author->creditos.ejs con titulo. - ko
+                        vacio creditos.ejs - ok¡¡ por aqui van los tiros.
+                        En el path de los videos puse video/ en vez de videos/ (tanta guerra por eso.., en fin) -- solucionado
+                    - ahora todo ok en local - salen videos, favicon, enlaces,... podrian estar mejor encuadrados, pero vale
+                    - git commit -m "Añadida página créditos GET /author y enlaces". desde rama(branch) créditos.
+                    -  push a github desde creditos - ok;  -push heroku desde creditos ok
+                    -* La página sigue siendo la de master. Conecto heroku con github en Deploy y cambio para que despliegue créditos
+                         Automatic deploys from créditos are enabled ok - pero sigue mostrando la rama master al aplicar
+                         Pruebo con Manual deploy un poco mas abajo, selecciono créditos y marco Deploy Branch y sale como se
+                         actualiza. -- solucionado
+                     - La pruebo y esta ok - aunque veo una raya de enlace por fuera del enlace a wikipedia - corrigo enlace
+                     - subo todo y actualizo con Manual deploy ( en heroku dasboard ) - perfecto.
+                     - vuelvo a master y hago merge. Me añade todos los 3 commits nuevos de créditos en master - no es como lo queria.
+                     - Como master no esta subido voy a juntar los 3 commits en uno. Uso git reset --soft HEAD~3 ,para volver 3
+                        commits atras sin que se borre nada. git status para confirmar que todo esta listo - ok
+                        foreman start por si acaso - ok. hago commit normal con mensaje "Ejer. modulo6 - ...."
+
+
+                            

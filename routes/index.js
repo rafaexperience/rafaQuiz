@@ -7,6 +7,7 @@ var router = express.Router();
 //  .question y .answer
 var quizController = require("../controllers/quiz_controller");
 
+// GET /home
 // acepta peticion GET / o /index y envia la pagina index.js con la variable title con valor "Express"
 router.get('/', function (req, res) {
     //res.render(vista, params)-->respuesta.generaPagina(pagina.ejs,objeto-
@@ -14,8 +15,13 @@ router.get('/', function (req, res) {
   res.render('index', { title: 'rafaQuiz' });
 });
 
-// Enviamos las peticiones get de quizes/.. a quizController --> controllers/quiz_controller.js
+//GET /quizes/..
+// Enviamos las peticiones get de /quizes/.. a quizController --> controllers/quiz_controller.js
 router.get("/quizes/question", quizController.question);
 router.get("/quizes/answer", quizController.answer);
+
+//GET /author
+// Enviamos peticiones get de /author a quizController
+router.get("/author", quizController.author);
 
 module.exports = router; // hace que router se pueda exportar a otros archivos
