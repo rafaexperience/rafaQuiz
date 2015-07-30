@@ -265,3 +265,7 @@ QUIZ 7 DESPLIEGUE DB EN HEROKU (POSTGRES)
         -Paso 5. Añado variables de entorno. .env (ahora si es obligatorio usar foreman start).
         -Paso 6. Adaptar models.js a postgres - ok
         -Paso 7,8. Comprobamos que funciona en local con foreman - http://localhost:5000/ perfecto y sin mensajes raros
+                Borramos rama créditos (ya mezclada) y creamos una para subir las pruebas y no meter commits de mas.
+                git branch -d créditos; git checkout -b pruebas; push heroku pruebas y cambiamos en dashboard Manual deploy - no sale pruebas - sigue créditos
+                    Primero hay que pasar la rama a github, y desde el heroku dashboard se selecciona la rama; push origin pruebas .. y manual deploy - ok
+                    Comprobamos pagina - ko -Aplication Error
