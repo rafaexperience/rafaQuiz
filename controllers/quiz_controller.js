@@ -1,19 +1,28 @@
-﻿// GET /quizes/question
+﻿// importamos objeto Quiz = quiz.sqlite a traves de models
+var models = require("../models/models.js");
+
+
+// GET /quizes/question
 //exporta la funcion como quiz_controller.question
 exports.question = function (req, res) {
-    //monta la pagina quizes/question con la pregunta como objeto 
-    res.render("quizes/question", { pregunta: "Capital de Italia ?: ", title: "Pregunta rafaQuiz" });
+    //coge todos los datos de quiz.sqlite y los pasa como parametro array quiz[]
+    models.Quiz.findAll().then(function (quiz) {
+        //monta la pagina quizes/question con la pregunta como objeto 
+        res.render("quizes/question", { pregunta: quiz[0].pregunta, title: "Pregunta rafaQuiz" });
+    })
 };
 // GET /quizes/answer
 //exporta la funcion como quiz_controller.answer
 exports.answer = function (req, res) {
-    if (req.query.respuesta === "Roma") {
-        //monta la pagina quizes/answer y le envia respuesta con el valor correspondiente 
-        res.render("quizes/answer", { respuesta: "¡¡ Asin es !!", title: 'Respuesta rafaQuiz' });
-    } else {
-        res.render("quizes/answer", { respuesta: "Que dices, tarao...", title: "Respuesta rafaQuiz" });
-    }
-    
+    //coge todos los datos de quiz.sqlite y los pasa como parametro array quiz[]
+    models.Quiz.findAll().then(function (quiz) {
+        if (req.query.respuesta === quiz[0].respuesta) {
+            //monta la pagina quizes/answer y le envia respuesta con el valor correspondiente 
+            res.render("quizes/answer", { respuesta: "¡¡ Asin es !!", title: 'Respuesta rafaQuiz' });
+        } else {
+            res.render("quizes/answer", { respuesta: "Que dices, tarao...", title: "Respuesta rafaQuiz" });
+        }
+    })
 };
 
 // GET /author

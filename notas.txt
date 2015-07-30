@@ -230,6 +230,26 @@ QUIZ 6+: (obl.) ENLACE A GITHUB Y /AUTHOR
                      - Como master no esta subido voy a juntar los 3 commits en uno. Uso git reset --soft HEAD~3 ,para volver 3
                         commits atras sin que se borre nada. git status para confirmar que todo esta listo - ok
                         foreman start por si acaso - ok. hago commit normal con mensaje "Ejer. modulo6 - ...."
+                    - Todo ok push heroku master y push origin master. cambio el Manual deploy de heroku a master. todo ok
 
+MODULO 7
+--------
+QUIZ 7 LAS BASES DE DATOS
 
-                            
+        -Paso1. Sequelize y SQLite3
+            instalamos paquetes:
+                npm install sequelize@1.7.0 se instala ok, pero tenia fallos de seguridad- elimino de package.json y paso a v3
+                npm install sqlite3 da errores y no se instala - no compatible con version de npm y node
+                - Me voy a ultimas versiones de ambos (instalo sin poner version) sequelize=^3.5.1 sqlite=^3.0.9
+                    ~0.8.0 :significa >= 0.8.0 < 0.9.0.
+                    ^0.8.0:significa >=0.7.0 < 1.0.0. 
+                    cambiadas ok en package.json
+        -Paso2 Definimos modelo (estructura de la tabla de la bd)
+            Creamos carpeta models y dentro archivo quiz.js con sequelize.define
+            Añadimos models.js en models/ que contruye bd segun el modelo importado y se conecta. 
+             Tambien añade datos si esta vacia.
+        -Paso3. El controlador
+            añadimos al controlador quiz_controller el acceso a quiz.sqlite (Quiz en models.js- > models.Quiz)
+        - corrigo un par de errores sintacticos y todo ok con foreman start
+        - añado quiz.sqlite a .gitignore. git add . y git commit -m "La base de datos: sequelize.js y SQLite"
+                - Por cierto, puedo ver el contenido directamente en quiz.sqlite con un plugin de firefox: sqlite manager
