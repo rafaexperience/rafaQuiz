@@ -269,5 +269,9 @@ QUIZ 7 DESPLIEGUE DB EN HEROKU (POSTGRES)
                 git branch -d créditos; git checkout -b pruebas; push heroku pruebas y cambiamos en dashboard Manual deploy - no sale pruebas - sigue créditos
                     Primero hay que pasar la rama a github, y desde el heroku dashboard se selecciona la rama; push origin pruebas .. y manual deploy - ok
                     -* Comprobamos pagina - ko -Aplication Error - hacemos heroku log --source app --tail :  fallo con el dialecto y no encuentra modulo pg-hstore.
-                        lo instalamos con --save - añadido en package.json ok - commit nuevo en pruebas; git push origin pruebas ok y en heroku manual deploy - añade modulo ok- ; Probamos - sigue ko - ya no sale error pg-hstore, pero
-                          sigue the dialect postgres is not supported. (install pg module manually) reviso package y no esta pg ( no debi poner --save) reinstalo
+                        lo instalamos con --save - añadido en package.json ok - commit nuevo en pruebas; git push origin pruebas ok y en heroku manual
+                         deploy - añade modulo ok- ; Probamos - sigue ko - ya no sale error pg-hstore, pero sigue the dialect postgres is not supported.
+                          (install pg module manually) reviso package y no esta pg ( no debi poner --save) reinstalo
+                          y subo de nuevo, actualizo en heroku, y probamoos -- ok Ya funciona todo - reviso log de heroku - todo limpio.
+                    - Paso los 3 commits de pruebas a master con merge. 
+
