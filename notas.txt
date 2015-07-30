@@ -253,3 +253,15 @@ QUIZ 7 LAS BASES DE DATOS
         - corrigo un par de errores sintacticos y todo ok con foreman start
         - añado quiz.sqlite a .gitignore. git add . y git commit -m "La base de datos: sequelize.js y SQLite"
                 - Por cierto, puedo ver el contenido directamente en quiz.sqlite con un plugin de firefox: sqlite manager
+
+QUIZ 7 DESPLIEGUE DB EN HEROKU (POSTGRES)
+        
+        -Paso 1 y 2 Añadimos Postgresql a despliegue en heroku (segun pagina addons heroku):
+            heroku addons:create heroku-postgresql:hobby-dev
+            ok. segun instalacion esta vacia, reinicio la app y configuro la variable DATABASE_URL
+            confirmo en heroku dashboard - ok rafaquiz :: database :: knitting-purposefully-2052 y en settings DATABASE_URL OK
+        -Paso 3. Modificamos package.json - añadimos devDependencies para modo local con sqlite3 (borramos sqlite3 de dependencies)
+        -Paso 4. Instalo posgresql ok pero aun no pghstore..(hasta que sepa para que..) - ok en package.json
+        -Paso 5. Añado variables de entorno. .env (ahora si es obligatorio usar foreman start).
+        -Paso 6. Adaptar models.js a postgres - ok
+        -Paso 7,8. Comprobamos que funciona en local con foreman - http://localhost:5000/ perfecto y sin mensajes raros
