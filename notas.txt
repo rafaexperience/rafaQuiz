@@ -179,4 +179,9 @@ QUIZ 6: DESPLIEGUE EN HEROKU
             -el titulo sale ok, pero veo que no sale el favicon, lo dejo como antes y sigue ko.
             - No sale la petición en logs, pruebo varias cosas y al cambiar el formato a png aparece ok. ¡¡¡???
             - Parece que ya funciona todo ok.
-    - Lo reenvio a heroku.
+    - hago git commit --amend -m "CSS adaptable a móviles y PC´s" y Lo reenvio a heroku. (--amend es para añadirlo al commit hecho)
+        git push heroku master -f (-f es para que lo suba, aunque el commit en remote(heroku) sea el mismo pero mas atrasado, fast-forwards)
+        como el repositorio de heroku no esta pensado para ver los comentarios, no deberia haber problemas.
+        De todos modos intentaré hacer un branch para las pruebas y poder subirlas sin afectar el original.
+    - todo ok en heroku.
+    - Añado Procfile y módifico package.json (Aunque no hacen falta si no hay variables de entorno)
