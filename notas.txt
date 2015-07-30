@@ -185,3 +185,18 @@ QUIZ 6: DESPLIEGUE EN HEROKU
         De todos modos intentaré hacer un branch para las pruebas y poder subirlas sin afectar el original.
     - todo ok en heroku.
     - Añado Procfile y módifico package.json (Aunque no hacen falta si no hay variables de entorno)
+    - Compruebo con foreman start- todo ok
+    - git commit -m "Despliegue en la nube (HEROKU)"
+    - git push origin master - - ko (por el commit modificado) - lo fuerzo con -f (fue hace poco, no creo que le importe a nadie) ok.
+    - git push heroku master - ok (ya estaba forzado de antes); - heroku open 
+    - todo ok. titulo segun pagina, favicon en todas y mensages del heroku logs correctos.
+
+Paso 6+: (obl.) ENLACE A GITHUB Y /AUTHOR
+    - EJERCICIO P2P Obligatorio
+            - Crear repositorio en github desde 0, siguiendo las instrucciones.
+                Lo que ya hicimos, va.
+            - Modificar servidor para añadir enlace en <footer> del marco (layout) que apunte al proyecto en github
+                Modifico views/layout.ejs y le pongo imágenes a los enlaces, por lo mono.
+            - Crear rama créditos,y desde ella, modificar servidor para responder peticiones GET a /author y devuelva una vista
+               con los autores, su fotografia y un video. Añadir enlace en la barra de navegación a pagina de créditos=/author
+               Despues integrar los cambios con master y subirlo a github. Cuando este ok, a heroku.
