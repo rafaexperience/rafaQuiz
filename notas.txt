@@ -274,3 +274,4 @@ QUIZ 7 DESPLIEGUE DB EN HEROKU (POSTGRES)
                           (install pg module manually) reviso package y no esta pg ( no debi poner --save) reinstalo
                           y subo de nuevo, actualizo en heroku, y probamoos -- ok Ya funciona todo - reviso log de heroku - todo limpio.
                     - Paso los 3 commits de pruebas a master con merge. 
+
