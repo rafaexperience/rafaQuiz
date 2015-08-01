@@ -1,6 +1,13 @@
 ﻿// importamos objeto Quiz = quiz.sqlite a traves de models
 var models = require("../models/models.js");
 
+// GET /quizes/
+exports.index = function (req, res) {
+    //coge todos los datos de bd y los pasa como parametro array quizes[]
+    models.Quiz.findAll().then(function (quizes) {
+        res.render("quizes/index", { quizes: quizes, title: "Preguntas rafaQuiz" });
+    })
+};
 
 // GET /quizes/question
 //exporta la funcion como quiz_controller.question

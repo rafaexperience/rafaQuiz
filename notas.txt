@@ -254,7 +254,7 @@ QUIZ 7 LAS BASES DE DATOS
         - añado quiz.sqlite a .gitignore. git add . y git commit -m "La base de datos: sequelize.js y SQLite"
                 - Por cierto, puedo ver el contenido directamente en quiz.sqlite con un plugin de firefox: sqlite manager
 
-QUIZ 7 DESPLIEGUE DB EN HEROKU (POSTGRES)
+QUIZ 8 DESPLIEGUE DB EN HEROKU (POSTGRES)
         
         -Paso 1 y 2 Añadimos Postgresql a despliegue en heroku (segun pagina addons heroku):
             heroku addons:create heroku-postgresql:hobby-dev
@@ -274,3 +274,14 @@ QUIZ 7 DESPLIEGUE DB EN HEROKU (POSTGRES)
                           (install pg module manually) reviso package y no esta pg ( no debi poner --save) reinstalo
                           y subo de nuevo, actualizo en heroku, y probamoos -- ok Ya funciona todo - reviso log de heroku - todo limpio.
                     - Paso los 3 commits de pruebas a master con merge. 
+
+QUIZ 9 lISTA DE PREGUNTAS
+       - Cambiamos una ruta cada vez.
+       - Antes de nada cambiamos models.js para que cree las dos preguntas. Usamos bulkCreate para crear varias preguntas a la vez.
+          Tambien cambio el mensaje para que indique que creo 2 preguntas
+          Como ya hay una pregunta, no crea nada. borramos preguntas con plugin de firefox para manipular bd local, sqlite manager
+          borramos todas las preguntas y reinicamos con foreman, ahora se crean ok
+        --------PENDIENTE BORRAR DATOS EN BD HEROKU PARA CREAR 2 PREGUNTAS CUANDO ARRANQUE-----------
+        - Creamos ruta GET quizes/ . Primero añadimos ruta en routes/index.js para quizes/ que será manejada por quizController.index.
+          añadimos a quiz_controller el exports.index que montara la pagina con el objeto quizes(todos los campos de la bd) y el archivo
+           views/quizes/index.ejs
