@@ -278,10 +278,20 @@ QUIZ 8 DESPLIEGUE DB EN HEROKU (POSTGRES)
 QUIZ 9 lISTA DE PREGUNTAS
        - Cambiamos una ruta cada vez.
        - Antes de nada cambiamos models.js para que cree las dos preguntas. Usamos bulkCreate para crear varias preguntas a la vez.
-          Tambien cambio el mensaje para que indique que creo 2 preguntas
+          Tambien cambio el mensaje para que indique que creo 2 preguntas. pruebo en local.
           Como ya hay una pregunta, no crea nada. borramos preguntas con plugin de firefox para manipular bd local, sqlite manager
           borramos todas las preguntas y reinicamos con foreman, ahora se crean ok
         --------PENDIENTE BORRAR DATOS EN BD HEROKU PARA CREAR 2 PREGUNTAS CUANDO ARRANQUE-----------
         - Creamos ruta GET quizes/ . Primero añadimos ruta en routes/index.js para quizes/ que será manejada por quizController.index.
           añadimos a quiz_controller el exports.index que montara la pagina con el objeto quizes(todos los campos de la bd) y el archivo
-           views/quizes/index.ejs
+           views/quizes/index.ejs. Tambien cambiamos el enlace de preguntas en <nav>, en layout.ejs. probamos local- todo correcto
+           (solo sale listado de preguntas, que es lo que cambie)- lo subo a github desde branch pruebas para probar esta parte
+        - En heroku arranca bien, pero salen 3 preguntas (1 repetida), borramos la base de datos (heroku dashboard->base de datos->settings->reset)Ahora no arranca /quizes, home(/) sigue ok. Reiniciamos dyno para que la app se cargue entera. todo ok con 2 preguntas (con id 1 y 2)
+        
+        - Creamos ahora la ruta GET /show ( que mostrará la pregunta seleccionada). modificamos ruta /question en routes/index.js.
+            en vez de /question ponemos /quizes/ con un parametro(quizId) que solo acepte numeros (\\d+) y la enviamos a quizController.show.
+            Añadimos en archivo quiz_controller, exports.show, que será como /quizes/question, pero el parametro solo será una pregunta
+            identificada por el id pasado, no un array con todas y marcando la primera, como antes.Se enviara el objeto entero 
+            (será show.ejs quien coja la pregunta de quiz).
+            Añadimos archivo views/quizes/show.ejs que sera un formulario (casi como el antiguo question.ejs) que mostrara la pregunta del 
+            objeto que se le envio y enviara una peticion(action) a quiz/<param>/answer. con la misma id de ese objeto

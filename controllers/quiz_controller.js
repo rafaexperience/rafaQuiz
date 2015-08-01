@@ -11,11 +11,11 @@ exports.index = function (req, res) {
 
 // GET /quizes/question
 //exporta la funcion como quiz_controller.question
-exports.question = function (req, res) {
-    //coge todos los datos de quiz.sqlite y los pasa como parametro array quiz[]
-    models.Quiz.findAll().then(function (quiz) {
-        //monta la pagina quizes/question con la pregunta como objeto 
-        res.render("quizes/question", { pregunta: quiz[0].pregunta, title: "Pregunta rafaQuiz" });
+exports.show = function (req, res) {
+    //busca por id en la bd y pasa el objeto como parametro quiz
+    models.Quiz.findById(req.params.quizId).then(function (quiz) {
+        //monta la pagina quizes/show con la pregunta como objeto 
+        res.render("quizes/show", { quiz: quiz, title: "Pregunta rafaQuiz" }); //sera show.ejs quien mueste la pregunta quiz.pregunta
     })
 };
 // GET /quizes/answer

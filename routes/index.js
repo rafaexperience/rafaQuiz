@@ -18,7 +18,7 @@ router.get('/', function (req, res) {
 //GET /quizes/..
 // Enviamos las peticiones get de /quizes/.. a quizController --> controllers/quiz_controller.js
 router.get("/quizes/", quizController.index);
-router.get("/quizes/question", quizController.question);
+router.get("/quizes/:quizId(\\d+)", quizController.show);
 router.get("/quizes/answer", quizController.answer);
 
 //GET /author
