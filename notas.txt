@@ -282,16 +282,24 @@ QUIZ 9 lISTA DE PREGUNTAS
           Como ya hay una pregunta, no crea nada. borramos preguntas con plugin de firefox para manipular bd local, sqlite manager
           borramos todas las preguntas y reinicamos con foreman, ahora se crean ok
         --------PENDIENTE BORRAR DATOS EN BD HEROKU PARA CREAR 2 PREGUNTAS CUANDO ARRANQUE-----------
-        - Creamos ruta GET quizes/ . Primero añadimos ruta en routes/index.js para quizes/ que será manejada por quizController.index.
-          añadimos a quiz_controller el exports.index que montara la pagina con el objeto quizes(todos los campos de la bd) y el archivo
-           views/quizes/index.ejs. Tambien cambiamos el enlace de preguntas en <nav>, en layout.ejs. probamos local- todo correcto
-           (solo sale listado de preguntas, que es lo que cambie)- lo subo a github desde branch pruebas para probar esta parte
-        - En heroku arranca bien, pero salen 3 preguntas (1 repetida), borramos la base de datos (heroku dashboard->base de datos->settings->reset)Ahora no arranca /quizes, home(/) sigue ok. Reiniciamos dyno para que la app se cargue entera. todo ok con 2 preguntas (con id 1 y 2)
+        - Creamos ruta GET quizes/ . (mostrara todas preguntas Primero añadimos ruta en routes/index.js para quizes/ que será manejada por quizController.index.
+          Añadimos a quiz_controller el exports.index que montara la pagina con el objeto quizes(todos los campos de la bd) y el archivo  views/quizes/index.ejs. Tambien cambiamos el enlace de preguntas en <nav>, en layout.ejs. probamos local- todo correcto (solo sale listado de preguntas, que es lo que cambie)
+        - lo subo a github desde branch pruebas para probar esta parte
+           En heroku arranca bien, pero salen 3 preguntas (1 repetida), borramos la base de datos (heroku dashboard->base de datos->settings->reset)
+           Ahora no arranca /quizes, home(/) sigue ok. Reiniciamos dyno para que la app se cargue entera. todo ok con 2 preguntas (con id 1 y 2)
         
-        - Creamos ahora la ruta GET /show ( que mostrará la pregunta seleccionada). modificamos ruta /question en routes/index.js.
+        - Creamos ahora la ruta GET /quizes/(id pregunta) ( que mostrará la pregunta seleccionada). modificamos ruta /question en routes/index.js.
             en vez de /question ponemos /quizes/ con un parametro(quizId) que solo acepte numeros (\\d+) y la enviamos a quizController.show.
             Añadimos en archivo quiz_controller, exports.show, que será como /quizes/question, pero el parametro solo será una pregunta
             identificada por el id pasado, no un array con todas y marcando la primera, como antes.Se enviara el objeto entero 
             (será show.ejs quien coja la pregunta de quiz).
             Añadimos archivo views/quizes/show.ejs que sera un formulario (casi como el antiguo question.ejs) que mostrara la pregunta del 
             objeto que se le envio y enviara una peticion(action) a quiz/<param>/answer. con la misma id de ese objeto
+            - Comprobamos en local - todo ok - subo a github desde pruebas (que esta conectado con heroku), despliego en heroku - todo ok
+
+        - Falta la respuesta GET /quizes/(id pregunta)/answer (que indica si la respuesta coincide). Añadimos parametro ruta answer en routes/index.js.
+            Modificamos quiz_controller para que reciba un solo objeto identificado, y monte la página con ese objeto y el archivo answer.ejs.
+            Modificamos también answer.ejs para que cambie el enlace y vuelva a la pregunta que se respondió. pruebo y falla al enviar formulario
+            * me da error de memoria. En la versión anterior me paso algo parecido y era por no cerrar bien una variable en un .ejs. reviso answer.ejs cambio $> por %>
+             solucionado - pruebo varias preguntas. todo ok, salvo que vuelve a fallar favicon y enlace en views/index.ejs, en <HEAD> debajo del <h2> falla: va a quizes/question
+             cambio enlace a quizes/ y dejo favicon por si funciona en heroku. Hacemos commit y enviamos a github desde pruebas. deploy pruebas en heroku - 

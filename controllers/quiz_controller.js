@@ -9,8 +9,8 @@ exports.index = function (req, res) {
     })
 };
 
-// GET /quizes/question
-//exporta la funcion como quiz_controller.question
+// GET /quizes/(quizId) Ej: ./quizes/1
+//exporta la funcion show
 exports.show = function (req, res) {
     //busca por id en la bd y pasa el objeto como parametro quiz
     models.Quiz.findById(req.params.quizId).then(function (quiz) {
@@ -18,16 +18,16 @@ exports.show = function (req, res) {
         res.render("quizes/show", { quiz: quiz, title: "Pregunta rafaQuiz" }); //sera show.ejs quien mueste la pregunta quiz.pregunta
     })
 };
-// GET /quizes/answer
-//exporta la funcion como quiz_controller.answer
+// GET /quizes/(quizId)/answer
+//exporta la funcion .answer
 exports.answer = function (req, res) {
-    //coge todos los datos de quiz.sqlite y los pasa como parametro array quiz[]
-    models.Quiz.findAll().then(function (quiz) {
-        if (req.query.respuesta === quiz[0].respuesta) {
-            //monta la pagina quizes/answer y le envia respuesta con el valor correspondiente 
-            res.render("quizes/answer", { respuesta: "¡¡ Asin es !!", title: 'Respuesta rafaQuiz' });
+    //busca por id en la bd y pasa el objeto (pregunta, respuesta) como parametro quiz
+    models.Quiz.findById(req.params.quizId).then(function (quiz) {
+        if (req.query.respuesta === quiz.respuesta) {
+            //monta la pagina quizes/answer y le envia respuesta con el valor correspondiente, el titulo, y el objeto quiz
+            res.render("quizes/answer", { quiz: quiz, respuesta: "¡¡ Asin es !!", title: 'Respuesta rafaQuiz' });
         } else {
-            res.render("quizes/answer", { respuesta: "Que dices, tarao...", title: "Respuesta rafaQuiz" });
+            res.render("quizes/answer", { quiz: quiz, respuesta: "Que dices, tarao...", title: "Respuesta rafaQuiz" });
         }
     })
 };
