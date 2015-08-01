@@ -307,3 +307,4 @@ QUIZ 9 lISTA DE PREGUNTAS
         - El metodo de arranque de la bd no es muy estable, pero es como esta en el ejercicio y a la lista de preguntas le vedria bien algun limite de cuandas pueden salir, pero paso
         - pruebo en foreman, todo ok - commit, push y pruebo en heroku - todo ok
         - paso a master, organizo y envio a github
+
