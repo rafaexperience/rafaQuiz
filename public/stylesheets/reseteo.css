@@ -76,7 +76,7 @@ a {
 audio {
     height: 50px;
 }
-/*Añadidos generales para paginas- style.css en ej original*/
+/*---------------------Añadidos generales para paginas- style.css en ej original*/
 #page-wrap {
     margin: 2% auto;
     color: white;
@@ -102,19 +102,30 @@ audio {
         text-align: center;
     }
 
-        #page-wrap nav span {
-            margin: 0 10px 0 0;
-        }
-
 
 #n1 {
-    min-height: 20px;
+    min-height: 15px;
 }
+
+    #n1 span a { /*da relieve a h1 y todos los enlaces*/
+        text-decoration: none;
+        background-color: #ff6a00; /*(border: 5px solid outline) haria lo mismo,*/
+        border-top: 5px solid #dd6600;
+        border-left: 5px solid #dd6600;
+        border-right: 5px solid #ff9549;
+        border-bottom: 5px solid #ffb580; /* pero distinto color en cada navegador */
+        color: white;
+        display: block;
+        padding: 3px;
+        margin:5px auto;
+    }
 
 #s1 {
     min-height: 350px;
 }
-
+#s1 h3{
+    margin:10px auto;
+}
 #f1 a {
     margin: 2px 20px;
 }
@@ -123,7 +134,19 @@ audio {
         vertical-align: text-bottom;
     }
 
+#listapreg{
+    width:auto;
 
+}
+#listapreg table{
+    width:100%;
+}
+    #listapreg table tr td {
+        height:30px;
+    }
+#listapreg table tr td a{
+        font-size:20px;
+}
 
 .ficha {
     background-color: burlywood;
@@ -131,6 +154,8 @@ audio {
     padding: 2%;
     margin: 2%;
     align-items: center;
+    -ms-align-content: space-around;
+    -webkit-align-content: space-around;
     align-content: space-around;
 }
 
