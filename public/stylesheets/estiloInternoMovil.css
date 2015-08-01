@@ -16,31 +16,38 @@
         font-size: large;
     }
 
+#n1 span a {
+    margin: 5px auto;
+}
+
 #f1 a {
-    margin: 2px 20px;
+    margin: 5px 20px;
     display: block;
 }
 
 .ficha {
     display: block;
-    align-items:center;
+    align-items: center;
 }
+
 .fichaitem {
     height: 90%;
-    margin:auto;
+    margin: auto;
 }
-.nombre {
 
+.nombre {
 }
 
 .foto {
-  max-height: 200px;
-      margin: 3%;
+    max-height: 200px;
+    margin: 3%;
 }
-.video {margin: 1%;
-}
-.videoin {
 
+.video {
+    margin: 1%;
+}
+
+.videoin {
     height: 100%;
     width: 235px;
 }
