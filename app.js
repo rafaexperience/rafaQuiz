@@ -57,6 +57,7 @@ if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);
         res.render('error', {//muestra views/error.ejs
+            title: "error rafaQuiz",
             message: err.message + " (Error desarrollo)",
             error: err//se envia objeto err (incluye error.status y error.stack que se muestran en views/error.ejs)
         });
@@ -67,7 +68,8 @@ if (app.get('env') === 'development') {
 // no stacktraces leaked to user ( La pila de llamadas no le aparecera al usuario. no envia err)
 app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    res.render('error', {//muestra views/error.ejs
+    res.render('error', { //muestra views/error.ejs
+        title: "error rafaQuiz",
         message: err.message + " (Error produccion)",
         error: {} //se envia objeto vacio
     });

@@ -305,7 +305,7 @@ QUIZ 9 lISTA DE PREGUNTAS
              cambio enlace a quizes/ y dejo favicon por si funciona en heroku. Hacemos commit y enviamos a github desde pruebas. deploy pruebas en heroku - todo ok
         - Retoco un poco los css, de las preguntas y el menu
         - El metodo de arranque de la bd no es muy estable, pero es como esta en el ejercicio y a la lista de preguntas le vedria bien algun limite de cuandas pueden salir, pero paso
-        - pruebo en foreman, todo ok - commit, push y pruebo en heroku - todo ok
+        - pruebo en foreman, todo ok - commit, push y pruebo en heroku - todo ok (efectivamente el favicon sale en heroku)
         - paso a master, organizo y envio a github
 
 QUIZ 10 AUTOLOAD
@@ -314,4 +314,12 @@ QUIZ 10 AUTOLOAD
    
         - Añadimos el autoload en las rutas (routes/index) antes de que se respondan a las rutas /quizes/... que iran a quizController.load(tambien actualizo algun comentario de codigo)
           Añadimos el gestor .load a quiz_controller que cargara el objeto y gestionará el error, si no lo encuentra. Tambien modificamos .answer y .show, para que no busquen en la bd
-           y acepten req.quiz en su lugar, evitando hacer la busqueda dos veces.
+           y acepten req.quiz en su lugar, evitando hacer la busqueda dos veces. Comprobamos con foreman - Funciona perfecto
+        - Enviamos desde pruebas a github, y desplegamos pruebas en heroku 
+        -* responde ok con las preguntas que existen, pero si le pongo un id que no existe salta el dichoso error de la variable title is not defined y no carga el marco. 
+           Reviso error.ejs, esta ok. Tras rastrear los errores y revisar el codigo (y mucho tiempo y lagrimas) me doy cuenta que la página de error esta en el 
+           layout.ejs y este si que necesita variable title y no se la estoy pasando en ningun lado, porque en quiz_controller no hay ningun res.render("error,...")
+           lo busco y lo localizo en app.js (de hecho hay dos, para produccion y desrrollo), Le añado el titulo con los datos del error.
+           --SOLUCIONADO -y este error me ha confudido desde el principio (en vez de el error, me salia el error de la pagina de error, que mundo..) el favicon sigue sin salir en local
+            segun foreman ni siquiera lo pide. Le añado los dos enlaces favicon (.ico y .png). En local funciona. Retoco tambien los enlaces de <nav> para que cambien al pasar el raton.
+            -- todo ok en foreman. paso a github/heroku(pruebas)

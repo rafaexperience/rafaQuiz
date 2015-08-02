@@ -11,6 +11,7 @@ exports.load = function (req, res, next, quizId) { //(peticion http, respuesta h
             } else { next(new Error("No existe quizId= " + quizId)); } // pasa el control a funcion pasandole el parametro error con un mensaje
         }
     ).catch(function (error) {// {Captura el error y muestra la pagina error con mensaje pasado
+        console.log("error autoload")
         next(error);
     });
 };
@@ -20,6 +21,9 @@ exports.index = function (req, res) {
     //coge todos los datos de bd y los pasa como parametro array quizes[]
     models.Quiz.findAll().then(function (quizes) {
         res.render("quizes/index", { quizes: quizes, title: "Preguntas rafaQuiz" });
+    }).catch(function (error) {// {Captura el error y muestra la pagina error con mensaje pasado
+        console.log("error autoload");
+        next(error);
     })
 };
 
