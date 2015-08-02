@@ -308,3 +308,10 @@ QUIZ 9 lISTA DE PREGUNTAS
         - pruebo en foreman, todo ok - commit, push y pruebo en heroku - todo ok
         - paso a master, organizo y envio a github
 
+QUIZ 10 AUTOLOAD
+
+    - OBJETIVO: GESTIONAR LA CARGA DEL OBJETO DE LA BASE DE DATOS DE UNA VEZ Y CONTROLANDO LOS ERRORES DE ACCESO.
+   
+        - Añadimos el autoload en las rutas (routes/index) antes de que se respondan a las rutas /quizes/... que iran a quizController.load(tambien actualizo algun comentario de codigo)
+          Añadimos el gestor .load a quiz_controller que cargara el objeto y gestionará el error, si no lo encuentra. Tambien modificamos .answer y .show, para que no busquen en la bd
+           y acepten req.quiz en su lugar, evitando hacer la busqueda dos veces.

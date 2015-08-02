@@ -8,12 +8,15 @@ var router = express.Router();
 var quizController = require("../controllers/quiz_controller");
 
 // GET /home
-// acepta peticion GET / o /index y envia la pagina index.js con la variable title con valor "Express"
+// acepta peticion GET / o /index y monta la pagina index.js con la variable title con valor "rafaQuiz" y layout.ejs
 router.get('/', function (req, res) {
     //res.render(vista, params)-->respuesta.generaPagina(pagina.ejs,objeto-
     //con parametros (variables en ejs=<%=var%>)
   res.render('index', { title: 'rafaQuiz' });
 });
+
+// Autoload (pre-acceso a bd) - se carga cuando la ruta contiene quizId (/quizes/: show y answer)
+router.param("quizId", quizController.load);
 
 //GET /quizes/..
 // Enviamos las peticiones get de /quizes/.. a quizController --> controllers/quiz_controller.js
