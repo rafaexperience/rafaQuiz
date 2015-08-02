@@ -331,8 +331,7 @@ QUIZ 10+ EJ. OBLIGATORIO FORMULARIO EN /quizes/index
                 - Crear en rama(branch) busquedas 
                 - con un campo para introducir texto a buscar 
                 - con boton enviar
-                - El resultado devolvera la lista de preguntas que contengan el texto,
-                     por orden alfabetico
+                - El resultado devolvera la lista de preguntas que contengan el texto, por orden alfabetico
                 - mezclar con rama master
                 
          -Pistas
@@ -344,3 +343,16 @@ QUIZ 10+ EJ. OBLIGATORIO FORMULARIO EN /quizes/index
                     findAll({where: ["pregunta like ?".search]}) - revisar signos
                  - delimitar search con % antes y despues y sustituir espacios con %
                     Ej "uno dos" -->("%uno%dos%") buscará el texto tal cual
+
+    - Añado formulario a views/quizes/index.ejs. Escribo de Italia y pide
+        http://localhost:5000/quizes?search=de+Italia y devuelve /quizes de nuevo (lista de preguntas normal).
+    - No tengo idea de sql, asi que voy a intentar filtrar directamente
+      poniendo el texto directo en exports.index en quiz_controller.js
+       findAll(({where:["pregunta like ?".search]}))
+        Devuelve error:
+         Object function search() { [native code] } has no method 'replace'
+        Segun documentacion, http://docs.sequelizejs.com/en/latest/docs/querying/ , np parece ser asi, cambio por:
+        findAll({where:{pregunta: {$like: "%Italia"}}}) - sale ok pero no 
+        encuentra nada. Cambiamos.
+        findAll({where: {pregunta: {$like: '%de%Italia%'}}}) - funciona ok
+

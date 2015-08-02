@@ -19,10 +19,10 @@ exports.load = function (req, res, next, quizId) { //(peticion http, respuesta h
 // GET /quizes/
 exports.index = function (req, res, next) {
     //coge todos los datos de bd y los pasa como parametro array quizes[]
-    models.Quiz.findAll().then(function (quizes) {
+    models.Quiz.findAll({where: {pregunta: {$like: '%de%Italia%'}}})
+    .then(function (quizes) {
         res.render("quizes/index", { quizes: quizes, title: "Preguntas rafaQuiz" });
     }).catch(function (error) {// {Captura el error y muestra la pagina error con mensaje pasado
-        console.log("error autoload");
         next(error);
     })
 };

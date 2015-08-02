@@ -33,8 +33,8 @@ var sequelize = new Sequelize(DB_name, user, paswd,
 
 //Aplicamos la definicion de datos al objeto de la base de datos creada (quiz.js -->sequelize || postgres)
 //Hacemos visible Quiz para el resto del codigo; models/quiz.js (module.exports)
-exports.Quiz = sequelize.import(path.join(__dirname, "quiz"));
-
+Quiz = sequelize.import(path.join(__dirname, "quiz"));
+exports.Quiz=Quiz;
 //sync crea (o se conecta) con  bd. y ejecuta then()Cuando es exitoso
 sequelize.sync().then(function () {
     Quiz.count().then(function (count) {
