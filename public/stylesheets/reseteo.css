@@ -119,7 +119,10 @@ audio {
         padding: 3px;
         margin:5px auto;
     }
-
+    #n1 span a:hover {
+				color: #b65400;
+				background-color: #ffb580; /*(pone fondo claro y letra oscura al pasar por enlace*/
+			}
 #s1 {
     min-height: 350px;
 }

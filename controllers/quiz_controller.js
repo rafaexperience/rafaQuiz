@@ -1,11 +1,29 @@
 ﻿// importamos objeto Quiz = quiz.sqlite a traves de models
 var models = require("../models/models.js");
 
+// Autoload - se ejecuta si la ruta incluye quizId como parametro (viene de routes/index.js/)
+exports.load = function (req, res, next, quizId) { //(peticion http, respuesta http, next=continua al siguiente gestor, parametro identificador de objeto)
+    models.Quiz.findById(quizId).then(//Localiza objeto por id, segun parametro quizId
+        function (quiz) {// envia el objeto localizado a la funcion
+            if (quiz) { // Si lo encuentra
+                req.quiz = quiz; //lo guarda como req.quiz
+                next(); //pasa el control a la siguiente funcion(answer o show)
+            } else { next(new Error("No existe quizId= " + quizId)); } // pasa el control a funcion pasandole el parametro error con un mensaje
+        }
+    ).catch(function (error) {// {Captura el error y muestra la pagina error con mensaje pasado
+        console.log("error autoload")
+        next(error);
+    });
+};
+
 // GET /quizes/
 exports.index = function (req, res) {
     //coge todos los datos de bd y los pasa como parametro array quizes[]
     models.Quiz.findAll().then(function (quizes) {
         res.render("quizes/index", { quizes: quizes, title: "Preguntas rafaQuiz" });
+    }).catch(function (error) {// {Captura el error y muestra la pagina error con mensaje pasado
+        console.log("error autoload");
+        next(error);
     })
 };
 

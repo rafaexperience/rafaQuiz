@@ -1,11 +1,12 @@
-// Cargamos módulos en variables( Al ser parte de la aplicacion, deben estar en package.json)
+/* global __dirname */
+// Cargamos mÃ³dulos en variables( Al ser parte de la aplicacion, deben estar en package.json)
 // localmente, se instalarian con npm install
 // Resumen de modulos (sin conocerlos realmente)
 
 
 // express- modulo para crear servidores
 var express = require('express');
-// path- ayuda para montar (uri´s) rutas a archivos o recursos internet
+// path- ayuda para montar (uri's) rutas a archivos o recursos internet
 var path = require('path');
 // morgan- Ayuda para conectarse con permisos (log)
 var logger = require('morgan');
@@ -13,7 +14,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 // Analiza los parametros en body de una solicitud (Ej. formularios web) para recuperar datos--ver final modulo 4
 var bodyParser = require('body-parser');
-// Permite incluir un marco layout común a todas las páginas
+// Permite incluir un marco layout comÃºn a todas las pÃ¡ginas
 var partials = require('express-partials');
 // conecta con la pagina de inicio /routes/index.ejs
 var routes = require('./routes/index');
@@ -31,7 +32,7 @@ app.use(partials());
 app.use(logger('dev')); // supongo que dev sera el usuario que crea la pagina
 //elimino serve-favicon, por usar otro metodo
 app.use(bodyParser.json()); // 
-app.use(bodyParser.urlencoded({ extended: false })); // ver final modulo 4. Codifica url´s en utf8
+app.use(bodyParser.urlencoded({ extended: false })); // ver final modulo 4. Codifica url's en utf8
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public'))); // devuelve peticiones a recursos que esten en public/
 
@@ -42,7 +43,7 @@ app.use('/', routes); // envia las peticiones a /, a /routes/index.js
 // GESTION DE ERRORES - SI ACCEDE A RECURSOS QUE NO EXISTEN O LA APLICACION-SERVIDOR FALLA
 
 // captura 404 (recurso no encontrado) and envia al manejador de errores con codigo 404
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     var err = new Error('No tengo lo que buscas');
     err.status = 404;
     next(err);
@@ -54,9 +55,10 @@ app.use(function(req, res, next) {
 // se mostrara en ??(stacktrace - seguimiento en la pila de llamadas)
 // Algun tipo de registro de monitoreo.
 if (app.get('env') === 'development') {
-    app.use(function(err, req, res, next) {
+    app.use(function (err, req, res, next) {
         res.status(err.status || 500);
         res.render('error', {//muestra views/error.ejs
+            title: "error rafaQuiz",
             message: err.message + " (Error desarrollo)",
             error: err//se envia objeto err (incluye error.status y error.stack que se muestran en views/error.ejs)
         });
@@ -65,9 +67,10 @@ if (app.get('env') === 'development') {
 
 // manejador de error de producccion (en la red?)
 // no stacktraces leaked to user ( La pila de llamadas no le aparecera al usuario. no envia err)
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
     res.status(err.status || 500);
-    res.render('error', {//muestra views/error.ejs
+    res.render('error', { //muestra views/error.ejs
+        title: "error rafaQuiz",
         message: err.message + " (Error produccion)",
         error: {} //se envia objeto vacio
     });
