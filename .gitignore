@@ -8,6 +8,7 @@
 #CARPETAS
 .vs
 node_modules
+.settings/
 obj
 #ARCHIVOS CONCRETOS
 .ntvs_analysis.dat

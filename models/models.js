@@ -1,4 +1,6 @@
-﻿//cargamos modulo path en variable path - crea rutas de archivo
+﻿/* global __dirname */
+/* global process */
+//cargamos modulo path en variable path - crea rutas de archivo
 var path = require('path');
 //  VARIABLE ENTORNO: DATABASE_URL --process.env.DATABASE_URL
 //Postgres DATABASE_URL = postgres://user:passwd@host:port/database --> instalado en HEROKU como addon y configurada variable entorno al añadirlo
@@ -29,12 +31,11 @@ var sequelize = new Sequelize(DB_name, user, paswd,
 }
 );
 
-//Aplicamos la definicion de datos al objeto de la base de datos creado (quiz.js -->sequelize) y lo asignamos a var Quiz
-var Quiz = sequelize.import(path.join(__dirname, "quiz")); //  models/quiz.js (module.exports)
-//Hacemos visible Quiz para el resto del codigo
-exports.Quiz = Quiz;
+//Aplicamos la definicion de datos al objeto de la base de datos creada (quiz.js -->sequelize || postgres)
+//Hacemos visible Quiz para el resto del codigo; models/quiz.js (module.exports)
+exports.Quiz = sequelize.import(path.join(__dirname, "quiz"));
 
-//sync crea (o se conecta) con el archivo quiz.sqlite. ejecuta then()Cuando es exitoso
+//sync crea (o se conecta) con  bd. y ejecuta then()Cuando es exitoso
 sequelize.sync().then(function () {
     Quiz.count().then(function (count) {
         if (count === 0) {

@@ -322,5 +322,25 @@ QUIZ 10 AUTOLOAD
            lo busco y lo localizo en app.js (de hecho hay dos, para produccion y desrrollo), Le añado el titulo con los datos del error. y el catch de index, que lo pase
            --SOLUCIONADO -y este error me ha confudido desde el principio (en vez de el error, me salia el error de la pagina de error, que mundo..) el favicon sigue sin salir en local
             segun foreman ni siquiera lo pide. Le añado los dos enlaces favicon (.ico y .png). En local funciona. Retoco tambien los enlaces de <nav> para que cambien al pasar el raton.
-            -- todo ok en foreman. paso a github/heroku(pruebas) 
+            -- todo ok en foreman. paso a github/heroku(pruebas) en heroku tambien - envio a master y paso commits a 1 con reset
 
+QUIZ 10+ EJ. OBLIGATORIO FORMULARIO EN /quizes/index
+    
+        - Enunciado:
+            Añadir un formulario en quizes/index 
+                - Crear en rama(branch) busquedas 
+                - con un campo para introducir texto a buscar 
+                - con boton enviar
+                - El resultado devolvera la lista de preguntas que contengan el texto,
+                     por orden alfabetico
+                - mezclar con rama master
+                
+         -Pistas
+                - ruta con query GET /quizes?search=texto_a_buscar
+                - formulario tipo GET y envia parametro search con string
+                    Ej buscar: italia, -->GET /quizes?search=italia.
+                 - Modificar quiz_controller.index
+                 - para buscar preguntas usar:
+                    findAll({where: ["pregunta like ?".search]}) - revisar signos
+                 - delimitar search con % antes y despues y sustituir espacios con %
+                    Ej "uno dos" -->("%uno%dos%") buscará el texto tal cual

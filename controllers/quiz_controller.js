@@ -17,7 +17,7 @@ exports.load = function (req, res, next, quizId) { //(peticion http, respuesta h
 };
 
 // GET /quizes/
-exports.index = function (req, res) {
+exports.index = function (req, res, next) {
     //coge todos los datos de bd y los pasa como parametro array quizes[]
     models.Quiz.findAll().then(function (quizes) {
         res.render("quizes/index", { quizes: quizes, title: "Preguntas rafaQuiz" });
