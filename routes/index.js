@@ -12,7 +12,7 @@ var quizController = require("../controllers/quiz_controller");
 router.get('/', function (req, res) {
     //res.render(vista, params)-->respuesta.generaPagina(pagina.ejs,objeto-
     //con parametros (variables en ejs=<%=var%>)
-  res.render('index', { title: 'rafaQuiz' });
+  res.render('index', { title: 'rafaQuiz', errors: [] });
 });
 // AUTOLOAD (recoge rutas con parametro quizId)
 router.param("quizId", quizController.load);

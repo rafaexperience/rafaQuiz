@@ -54,13 +54,18 @@
             <span><a href="/quizes">Preguntas</a></span>
             <span><a href="/author">Cr&#233;ditos</a></span>
         </nav>
-        <section class="main" id="s1">
-
+    <section class="main" id="s1">
+        <% if(errors.length){ %>
+            <span >
+                <% for (var i in errors) { %>
+                     <span id="ErrorMsg"> <%= errors[i].message %> </span>
+                <% } %>
+            </span>
+         <% } %>
             <div>
                 <%- body %>
             </div>
-
-        </section>
+</section>
         <footer class="main" id="f1">
             <a href="https://es.wikipedia.org/wiki/Quiz">
                 &#191; Que es un quiz ?

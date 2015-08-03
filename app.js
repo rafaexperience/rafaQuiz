@@ -59,6 +59,7 @@ if (app.get('env') === 'development') {
         res.status(err.status || 500);
         res.render('error', {//muestra views/error.ejs
             title: "error rafaQuiz",
+            errors: [],
             message: err.message + " (Error desarrollo)",
             error: err//se envia objeto err (incluye error.status y error.stack que se muestran en views/error.ejs)
         });
@@ -71,6 +72,7 @@ app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', { //muestra views/error.ejs
         title: "error rafaQuiz",
+        errors: [],
         message: err.message + " (Error produccion)",
         error: {} //se envia objeto vacio
     });

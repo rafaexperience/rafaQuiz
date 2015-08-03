@@ -19,7 +19,7 @@ var storage = process.env.DATABASE_STORAGE; // variable entorno (si esta en loca
 //cargamos modulo sequelize en variable Sequelize- Gestiona modelos de bd reales (dentro de las compatibles)
 var Sequelize = require('sequelize');
 
-//Creamos "objeto" para base datos tipo sqlite o postgres (ahora añadimos datos segun division url con subexpresiones regulares) 
+//Creamos modelo para base datos tipo sqlite o postgres (ahora añadimos datos segun division url con subexpresiones regulares) 
 var sequelize = new Sequelize(DB_name, user, paswd,
     {
     dialect: protocol,

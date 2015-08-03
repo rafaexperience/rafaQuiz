@@ -380,5 +380,22 @@ QUIZ 10+ EJ. OBLIGATORIO FORMULARIO EN /quizes/index
     - Ahora ok, pero acabo de recordar que el ejercicio del mod 7 tenia que mostrar las preguntas ordenadas. Intento añadirlo al commit adecuado 
         voy con checkout, añado commit con amend; no soy capaz me dice que cree otra rama.
     - Añado todo ahora - funciona ok en local, pero cuando ordena segun el formulario de busqueda, deja las minusculas para el final. 
+    - paso a github y heroku
         
-
+ QUIZ 12 VALIDACION DE ENTRADAS
+        OBJETIVO: Introducir en app comprovaciones para evitar que los campos en la bd estén vacios
+        
+       - Añadimos validaciones en quiz.js, tambien le pongo notNull. (solo especifica los filtros, no los aplica)
+       - Añadimos funcion validate en quiz_controller - create (ahora aplica los filtros en este control). Tambien añadimos el parametro error a los render.
+           ?? Diria que habria que enviar errors solo a newquiz.ejs, ya que los otros van vacios, y no meterlo en layout.ejs, pero lo dejo como dice.
+       - Añado a layout.ejs la parte de error, sin titulo, porque me parece que solo ocupa espacio
+       - quiz controller answer seguia con el if que llevaba a dos render, en vez de gestionar el mensaje ( juraria que ya lo cambie, pero tanto commit me lia)
+            Lo cambio, y le pongo el parametro de error. Tambien se lo añado a author, que no sale en transparencias.
+       - Añado paremetro error a los otros archivos que tienen render. App.js  en errores y index.js en index
+       - El css pongo lista errores en rojo.
+       - Probamos - ko -  no graba respuesta vacia, pero no muestra el error. Añado console.log, Corfirma que entra bien, dato erroneo y pasa a no validado
+           * logs no dan error. llega a POST /quizes/create. Reviso layout.ejs. Vale, toneteria, le puse errors.length ===0, quito el igual.
+                Ahora sale mensaje, pero salen dos avisos: Warning "notNull" validation has been deprecated in favor of Schema based "allowNull" 
+                Por lo que entiendo, hay conflicto entre el notNull y alguna configuracion de sequelize. quito notNull de models/quiz.js - solucionado
+       - commit  y envio a github y compruebo en heroku.
+                
