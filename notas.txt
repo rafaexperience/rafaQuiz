@@ -213,10 +213,11 @@ QUIZ 6+: (obl.) ENLACE A GITHUB Y /AUTHOR
                         pruebo a desviar con index directo a creditos con titulo - ko - sin titulo - ko - dejo como antes
                         pruebo a desviar con index a quiz_controller.question con titulo cambiado - ko--
                             curiosamente no puse el path a question y sigue dando error en variable title, asi que no tiene que ver.
-                            (Se ve que tanto modulo confunde al programa)
+                            (Se ve que tanto modulo confunde al programa) -- Luego vi que el problema era que no le pasaba title a layout.ejs + error.ejs
                         La pongo como al principio index.js ->quiz_controller.author->creditos.ejs con titulo. - ko
                         vacio creditos.ejs - ok¡¡ por aqui van los tiros.
                         En el path de los videos puse video/ en vez de videos/ (tanta guerra por eso.., en fin) -- solucionado
+                        por cierto, el video mio es el mismo que puse en el curriculum del curso anterior, por eso no tiene mucho sentido
                     - ahora todo ok en local - salen videos, favicon, enlaces,... podrian estar mejor encuadrados, pero vale
                     - git commit -m "Añadida página créditos GET /author y enlaces". desde rama(branch) créditos.
                     -  push a github desde creditos - ok;  -push heroku desde creditos ok
@@ -322,5 +323,39 @@ QUIZ 10 AUTOLOAD
            lo busco y lo localizo en app.js (de hecho hay dos, para produccion y desrrollo), Le añado el titulo con los datos del error. y el catch de index, que lo pase
            --SOLUCIONADO -y este error me ha confudido desde el principio (en vez de el error, me salia el error de la pagina de error, que mundo..) el favicon sigue sin salir en local
             segun foreman ni siquiera lo pide. Le añado los dos enlaces favicon (.ico y .png). En local funciona. Retoco tambien los enlaces de <nav> para que cambien al pasar el raton.
-            -- todo ok en foreman. paso a github/heroku(pruebas) 
+            -- todo ok en foreman. paso a github/heroku(pruebas) en heroku tambien - envio a master y paso commits a 1 con reset
+                en local pide los dos iconos 2 veces, pero funciona. En heroku, solo lo pide uno (ico)
+
+QUIZ 10+ EJ. OBLIGATORIO FORMULARIO EN /quizes/index
+    
+        - Enunciado:
+            Añadir un formulario en quizes/index 
+                - Crear en rama(branch) busquedas 
+                - con un campo para introducir texto a buscar 
+                - con boton enviar
+                - El resultado devolvera la lista de preguntas que contengan el texto, por orden alfabetico
+                - mezclar con rama master
+                
+         -Pistas
+                - ruta con query GET /quizes?search=texto_a_buscar
+                - formulario tipo GET y envia parametro search con string
+                    Ej buscar: italia, -->GET /quizes?search=italia.
+                 - Modificar quiz_controller.index
+                 - para buscar preguntas usar:
+                    findAll({where: ["pregunta like ?".search]}) - revisar signos
+                 - delimitar search con % antes y despues y sustituir espacios con %
+                    Ej "uno dos" -->("%uno%dos%") buscará el texto tal cual
+
+    - Añado formulario a views/quizes/index.ejs. Escribo de Italia y pide http://localhost:5000/quizes?search=de+Italia y devuelve /quizes de nuevo (lista de preguntas normal).
+    - No tengo idea de sql, asi que voy a intentar filtrar directamente poniendo el texto directo en exports.index en quiz_controller.js.
+       Cambio findAll() por findAll(({where:["pregunta like ?".search]})) .Devuelve error:   Object function search() { [native code] } has no method 'replace'
+        Segun documentacion, http://docs.sequelizejs.com/en/latest/docs/querying/ , no parere ser asi, cambio por: findAll({where:{pregunta: {$like: "%Italia"}}})
+         - sale ok pero no encuentra nada. Cambiamos.  findAll({where: {pregunta: {$like: '%Italia%'}}}) - funciona ok. Le añado otro texto '%de%Italia%' funciona ok.
+     - Lo adapto para que lea la variable pasada req.query.search. y la convierta en el string del objeto pasado como filtro para sustituir objeto vacio= sin filtro. ver código quiz_controller.js
+     - Lo de sustituir los espacios por % no parece hacer falta, introduzco "de Italia" y sale ok - solo pregunta Italia, aunque la otra tenga "de" también.
+        Lo añado de todos modos, ya que lo pide, Transformo espacio en %, ya que bodyParser.urlencoded ya lo transforma de +(como sale en la url).
+         Añado un par de console.log() para confirmar que la transformacion se hace ok - Compruebo con foreman start - todo ok - sin parametros, con ellos, y con 2, ok.
+          envio a github, desde branch busquedas, y cambio rama en heroku - deploy -manual deploy a busquedas.
+      - Todo ok - modifico console.log para indicar que muestran commit --amend y a master
+     
 
