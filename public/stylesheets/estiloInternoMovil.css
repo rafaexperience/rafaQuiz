@@ -35,7 +35,14 @@
     margin: auto;
 }
 
-.nombre {
+#formBusqP input{
+    font-size: 15px;
+    display: block;
+    margin: 5px auto;
+}
+#quizesindex a{
+    display: block;
+    margin: 5px auto;
 }
 
 .foto {

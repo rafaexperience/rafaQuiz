@@ -354,8 +354,31 @@ QUIZ 10+ EJ. OBLIGATORIO FORMULARIO EN /quizes/index
      - Lo adapto para que lea la variable pasada req.query.search. y la convierta en el string del objeto pasado como filtro para sustituir objeto vacio= sin filtro. ver código quiz_controller.js
      - Lo de sustituir los espacios por % no parece hacer falta, introduzco "de Italia" y sale ok - solo pregunta Italia, aunque la otra tenga "de" también.
         Lo añado de todos modos, ya que lo pide, Transformo espacio en %, ya que bodyParser.urlencoded ya lo transforma de +(como sale en la url).
+        Por cierto, creo que hace lo contrario porque si pongo "l ?" salen ambas, y no solo "portugal ?".
          Añado un par de console.log() para confirmar que la transformacion se hace ok - Compruebo con foreman start - todo ok - sin parametros, con ellos, y con 2, ok.
           envio a github, desde branch busquedas, y cambio rama en heroku - deploy -manual deploy a busquedas.
-      - Todo ok - modifico console.log para indicar que muestran commit --amend y a master
-     
+      - Todo ok - modifico console.log para indicar que muestran commit --amend y a master y git reset --soft <commit autoload> y commit, para ordenar
+  
+  -------------------------------------MODULO 8----------------------------------------------
+  
+  QUIZ 11 CREAR PREGUNTAS    
+        OBJETIVO: Añadir enlace en /quizes a pagina con formulario par crear preguntas nuevas y guardarlas en db 
+        
+    - Añadimos la página que contendrá el formulario views/quizes/newquiz.ejs . Cambio el nombre de new a newquiz en todo (new es una palabra clave y no quiero problemas raros)
+        Por alguna razon question.ejs sigue por ahi, la elimino. No tengo claro porque se añade el formulario por separado, salvo por probarlo, pero ya se hace con layout.ejs,
+         asi que voy a hacerlo todo junto, es decir newquiz.ejs + _form.ejs --> newquiz.ejs.
+    - Añadimos controlador-newquiz a quiz_controller.js. Cambio el nombre de la variable quiz a nquiz, porque no es parte de la db, todavia. También en newquiz.ejs y le añado el titulo, 
+        para montar la página con layout.ejs.
+    - Añadimos ruta a routes/index.js quizes/newquiz --> quizController.newquiz. Tambien añado la ruta de create.
+    - Creo el enlace en views/quizes/index.ejs , para poder ver que todo funciona hasta aqui. Compruebo si llega al formulario
+         -* falla - no encuentra el recurso. - nombres todos ok - anulo la ruta a create en routes/index - ok - llega ok al formulario -solucionado
+          - modifico el formulario (muy alargado)  y tuneo un poco todo. Cambio tambien app.js y quito extended false de urlencoded
+    - Empezamos con la respuesta al formulario. Quito comentario a  ruta quizes/create en routes/index.js. Añado a quiz_controller el controllador de create
+        Probamos - ko 404 - Tras un rato, me doy cuenta que la ruta para create es post y yo puse router.get . Corrigo y todo ok- Se añaden preguntas ok en local
+        Pruebo a volvera a poner app.js con urlencoded con extended false . se graban las preguntas y respuestas como null
+    - Probamos en heroku. - ko graba preguntas como null - me olvide de volver a cambiarl app.js - modifico.
+    - Ahora ok, pero acabo de recordar que el ejercicio del mod 7 tenia que mostrar las preguntas ordenadas. Intento añadirlo al commit adecuado 
+        voy con checkout, añado commit con amend; no soy capaz me dice que cree otra rama.
+    - Añado todo ahora - funciona ok en local, pero cuando ordena segun el formulario de busqueda, deja las minusculas para el final. 
+        
 

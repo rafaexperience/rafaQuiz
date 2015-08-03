@@ -32,7 +32,7 @@ app.use(partials());
 app.use(logger('dev')); // supongo que dev sera el usuario que crea la pagina
 //elimino serve-favicon, por usar otro metodo
 app.use(bodyParser.json()); // 
-app.use(bodyParser.urlencoded({ extended: false })); // ver final modulo 4. Codifica url's en utf8
+app.use(bodyParser.urlencoded()); // ver final modulo 4. Codifica url's en utf8
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public'))); // devuelve peticiones a recursos que esten en public/
 

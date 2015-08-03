@@ -1,14 +1,21 @@
-﻿<div id="listapreg">
-    <table>
-        <% for (var i=0; i < quizes.length; i++) { %>
-        <tr><td><a href="quizes/<%= quizes[i].id %>"><%= quizes[i].pregunta %></a></td></tr>
-        <% } %>
-    </table>
-</div>
-<div id="formBusqP">
-	<form method="get" action="/quizes">
-    <p>Buscar:</p>
-    <input type="text" name="search" placeholder="Escriba busqueda" />
-    <input type="submit" value="Enviar" />
-</form>
+﻿<div id="quizesindex">
+    <div id="listapreg">
+        <table>
+            <% for (var i=0; i < quizes.length; i++) { %>
+                <tr>
+                    <td>
+                        <a href="quizes/<%= quizes[i].id %>"><%= quizes[i].pregunta %></a>
+                    </td>
+                </tr>
+                <% } %>
+        </table>
+    </div>
+    <div id="formBusqP">
+        <form method="get" action="/quizes">
+            <p>Buscar:</p>
+            <input type="text" name="search" placeholder="Escriba busqueda" />
+            <input type="submit" value="Enviar" />
+        </form>
+    </div>
+    <a href="/quizes/newquiz"><button type="button">Crear pregunta</button></a>
 </div>

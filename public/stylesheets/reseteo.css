@@ -136,10 +136,15 @@ audio {
     #f1 a img {
         vertical-align: text-bottom;
     }
-
+#quizesindex a{
+    display: inline-block;
+    width:300px;
+    margin: 10px;
+}
 #listapreg{
-    width:auto;
-
+    width:90%;
+    margin: auto;
+    border: 5px solid #dd6600;
 }
 #listapreg table{
     width:100%;
@@ -150,7 +155,31 @@ audio {
 #listapreg table tr td a{
         font-size:20px;
 }
+#contfp h2{
+    margin: 10px;    
+}
+#formpreg{
+    display: flexbox;
+}
+#formpreg p label{
+    margin: 7px auto;
+    display: inline-block;
+    height: 20px;
+    width: 105px;
+}
+#preg,
+#resp {
+    display: inline-block;
+    height: 20px;
+    width: 250px;
+    padding: 2px 4px;
+}
 
+#formpreg p a{
+    display: inline-block;
+    align-items: flex-end;
+    width: 295px;
+}
 .ficha {
     background-color: burlywood;
     display: flex;

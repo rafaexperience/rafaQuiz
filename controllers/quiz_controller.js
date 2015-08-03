@@ -27,7 +27,8 @@ exports.index = function (req, res, next) {
     if (req.query.search) {
         var searchLoc="%"+(req.query.search.replace(/ /g, "%"))+"%";
         console.log("variable modificada, añadida a where: "+ searchLoc);//mostramos por consola  parametro transformado, que ira en where
-       busqueda={where: {pregunta: {$like: searchLoc}}};
+       busqueda={where: {pregunta: {$like: searchLoc}}, order:['pregunta']};
+
    }
     //coge todos los datos de bd que coinciden con la busqueda  y los pasa como parametro array quizes[]
     models.Quiz.findAll(busqueda)
@@ -60,6 +61,22 @@ exports.answer = function (req, res) {
         }
     })
 };
+// GET /quizes/newquiz
+exports.newquiz= function(req,res){
+    var nquiz=models.Quiz.build(
+        {pregunta: "Pregunta", respuesta: "respuesta"}
+    );
+    res.render("quizes/newquiz",{nquiz:nquiz, title: "Crea Pregunta rafaQuiz"})
+}
+// POST /quizes/create
+exports.create =function(req,res){
+    console.log(req.body.nquiz);
+    var quiz=models.Quiz.build(req.body.nquiz);
+    // guarda los campos del formulario pasado en la base de datos y vuelve a mostrar la pagina del indice con datos actualizados
+    quiz.save({fields:["pregunta", "respuesta"]}).then(function(){
+        res.redirect("/quizes")
+    })
+}
 
 // GET /author
 //exporta la funcion como quiz_controller.author
