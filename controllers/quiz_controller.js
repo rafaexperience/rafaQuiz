@@ -18,8 +18,19 @@ exports.load = function (req, res, next, quizId) { //(peticion http, respuesta h
 
 // GET /quizes/
 exports.index = function (req, res, next) {
-    //coge todos los datos de bd y los pasa como parametro array quizes[]
-    models.Quiz.findAll({where: {pregunta: {$like: '%de%Italia%'}}})
+    
+    //formato busqueda {where: {pregunta: {$like: '%de%Italia%'}}} -- var locales--> busqueda=objeto filtro, searchLoc=string a buscar
+    //Siempre le enviamos objeto filtro, si no tenemos fitro, ira vacio y no hará ningun filtro
+    var busqueda={};
+    console.log(req.query.search);//mostramos por consola parametro en la ruta
+    //Si hay query.search (no undefined=true) adaptamos la query(string) como parametro de where(filtro)
+    if (req.query.search) {
+        var searchLoc="%"+(req.query.search.replace(/ /g, "%"))+"%";
+        console.log(searchLoc);//mostramos por consola  parametro transformado, que ira en where
+       busqueda={where: {pregunta: {$like: searchLoc}}};
+   }
+    //coge todos los datos de bd que coinciden con la busqueda  y los pasa como parametro array quizes[]
+    models.Quiz.findAll(busqueda)
     .then(function (quizes) {
         res.render("quizes/index", { quizes: quizes, title: "Preguntas rafaQuiz" });
     }).catch(function (error) {// {Captura el error y muestra la pagina error con mensaje pasado
