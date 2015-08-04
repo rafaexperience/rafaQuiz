@@ -424,5 +424,25 @@ QUIZ 14 BORRAR PREGUNTAS
             Tambien le pongo como parametro a la funcion principal de destroy (req, res,next) para que lo gestione el catch.
         - Probamos. todo perfecto - commit, github y heroku
              
-
-                
+QUIZ 14+ AÑADIR INDICE TEMATICO
+    OBJETIVO: Añadir a cada pregunta un índice temático (Humanidades, Ocio, Ciencia, Tecnología o Otro). Hacer commit y pasar a github y heroku.
+    PISTAS:  - añadir campo a modelo de db.
+             - En formularios de creacion y edicion usar:
+                     <select name="tema">
+                         <option value="Otro" selected>Otro</option>
+                         <option value="Humanidades">Humanidades</option>
+                         ....
+                     </select>
+                         
+        - Modificamos modelo models/quiz.js. Añadimos propiedad  tema (como pregunta o respuesta).
+        - Cambiamos _form.ejs para incluir el menú extensible.
+        - Básicamente recorro los archivos y cuando se menciona pregunta y respuesta, le añado tema con el mismo formato
+        -* Probamos - Da error por no tener la columna tema en la bd. borro quiz.sqlite y reintento - arranca ok
+            La otra opción puede que pasara por migration, pero borre la base de datos sin querer.
+            modifico _form para añadirle la tilde de tecnología, que si habia puesto en quiz.js
+            todo ok - Lo único que cuando edita una pregunta, en tema sale Otros, que es el selected. Probe con datalist
+             pero no me convencio. Lo dejo asi por ahora
+         Todo funciona, aunque se  puede mejorar el diseño.
+         lo envio ya porque ya tuve que hacer la entrega del ejercicio antes de tiempo, aunque nadie lo corrigio aun
+        
+        

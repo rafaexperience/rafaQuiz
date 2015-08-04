@@ -68,7 +68,7 @@ exports.answer = function (req, res) {
 // GET /quizes/newquiz
 exports.newquiz= function(req,res){
     var quiz=models.Quiz.build(
-        {pregunta: "Pregunta", respuesta: "respuesta"}
+        {pregunta: "Pregunta", respuesta: "respuesta", tema:"Otros"}
     );
     res.render("quizes/newquiz",{quiz:quiz, errors: [], title: "Crea Preg/Res rafaQuiz"})
 }
@@ -85,7 +85,7 @@ exports.create = function (req, res) {
             res.render("quizes/newquiz", { quiz: quiz, errors: err.errors, title: "Crea Preg/Res rafaQuiz" });
         } else {//sin error guarda el objeto en bd y reabre pagina todas preguntas
             console.log("Campo nuevo guardado en db: " + quiz);
-            quiz.save({ fields: ["pregunta", "respuesta"] })
+            quiz.save({ fields: ["pregunta", "respuesta","tema"] })
             //y vuelve a mostrar la pagina del indice con datos actualizados
                 .then(function () { res.redirect("/quizes") })
         }
@@ -104,6 +104,7 @@ exports.update = function (req, res) {
     console.log("Entramos en update")
     req.quiz.pregunta = req.body.quiz.pregunta;
     req.quiz.respuesta = req.body.quiz.respuesta;
+    req.quiz.tema = req.body.quiz.tema;
     // Validamos los datos segun models/quiz.js propiedad validate de pregunta y respuesta)
     req.quiz.validate().then(
         function (err) {
@@ -111,9 +112,9 @@ exports.update = function (req, res) {
                 console.log("no validado y regresa a ");
                 res.render("quizes/editquiz", { quiz: req.quiz, errors: err.errors, title: "edit Preg/Res rafaQuiz" });
             } else {//sin error guarda el objeto en bd y reabre pagina todas preguntas
-                req.quiz.save({ fields: ["pregunta", "respuesta"] })
+                req.quiz.save({ fields: ["pregunta", "respuesta", "tema"] })
                     .then(function () {
-                        console.log("validado y guardado, vuelve a quizes: " + req.quiz.pregunta + req.quiz.respuesta);
+                        console.log("validado y guardado, vuelve a quizes: " +req.quiz.tema + req.quiz.pregunta + req.quiz.respuesta);
                         res.redirect("/quizes");
                     });
             }
