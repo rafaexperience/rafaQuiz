@@ -23,6 +23,8 @@ router.get("/quizes/:quizId(\\d+)", quizController.show);
 router.get("/quizes/:quizId(\\d+)/answer", quizController.answer);
 router.get("/quizes/newquiz", quizController.newquiz);
 router.post("/quizes/create", quizController.create);
+router.get("/quizes/:quizId(\\d+)/editquiz", quizController.editquiz);
+router.put("/quizes/:quizId(\\d+)", quizController.update)
 //GET /author
 // Enviamos peticiones get de /author a quizController
 router.get("/author", quizController.author);

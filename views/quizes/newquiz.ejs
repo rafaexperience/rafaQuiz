@@ -1,18 +1,6 @@
 <div id="contfp">
 	<h2>Añadir pregunta:</h2>
 	<form id="formpreg" method="post" action="/quizes/create">
-		<p>
-			<label for="preg" class="rem">Pregunta:</label>
-			<span></span>
-			<input type="text" id="preg" name="nquiz[pregunta]" value="<%= nquiz.pregunta %>" />
-		</p>
-		<p>
-			<label for="resp" class="rem">Respuesta:</label>
-			<input type="text" id="resp" name="nquiz[respuesta]" value="<%= nquiz.respuesta %>" />
-		</p>
-		<p>
-			<a href="/quizes"><button type="button">Cancelar</button></a>
-			<input type="submit" value="Salvar">
-		</p>
+		<% include _form.ejs %>
 	</form>
 </div>

@@ -38,17 +38,17 @@ exports.index = function (req, res, next) {
     })
 };
 //----------------SHOW--------------------------------------------------
-// GET /quizes/(quizId) Ej: ./quizes/1
+// GET /quizes/(quizId) Ej: ./quizes/1  -- carga objeto req.quiz en autoload
 //exporta la funcion show
 exports.show = function (req, res) {
     //busca por id en la bd y pasa el objeto como parametro quiz
     models.Quiz.findById(req.params.quizId).then(function (quiz) {
         //monta la pagina quizes/show con la pregunta como objeto 
-        res.render("quizes/show", { quiz: quiz, errors: [], title: "Pregunta rafaQuiz" }); //show.ejs muesta la pregunta
+        res.render("quizes/show", { quiz: quiz, errors: [], title: "Preg rafaQuiz" }); //show.ejs muesta la pregunta
     })
 };
 //---------------ANSWER--------------------------------------------------
-// GET /quizes/(quizId)/answer
+// GET /quizes/(quizId)/answer-- carga objeto req.quiz en autoload
 //exporta la funcion .answer
 exports.answer = function (req, res) {
     //busca por id en la bd y pasa el objeto (pregunta, respuesta) como parametro quiz
@@ -60,39 +60,67 @@ exports.answer = function (req, res) {
             resp = "¡¡ Asin es !!";
         };
         //monta la pagina quizes/answer y le envia respuesta con el valor correspondiente, el titulo, error,y el objeto quiz 
-        res.render("quizes/answer", { quiz: quiz, respuesta: resp, errors: [], title: "Respuesta rafaQuiz" });
+        res.render("quizes/answer", { quiz: quiz, respuesta: resp, errors: [], title: "Resp rafaQuiz" });
 
     })
 };
 //--------------NEWQUIZ-- O NEW ----------------------------------------
 // GET /quizes/newquiz
 exports.newquiz= function(req,res){
-    var nquiz=models.Quiz.build(
+    var quiz=models.Quiz.build(
         {pregunta: "Pregunta", respuesta: "respuesta"}
     );
-    res.render("quizes/newquiz",{nquiz:nquiz, errors: [], title: "Crea pregunta rafaQuiz"})
+    res.render("quizes/newquiz",{quiz:quiz, errors: [], title: "Crea Preg/Res rafaQuiz"})
 }
 //-------------------CREATE---------------------------------------------
 // POST /quizes/create
 exports.create = function (req, res) {
-    console.log(req.body.nquiz);
+    console.log(req.body.quiz);
     // creamos modelo del campo quiz a grabar
-    var nquiz = models.Quiz.build(req.body.nquiz);
+    var quiz = models.Quiz.build(req.body.quiz);
     // Validamos los datos (segun models/quiz.js propiedad validate de pregunta y respuesta)
-    nquiz.validate().then(function (err) {
-        if (err) {
+    quiz.validate().then(function (err) {
+        if (err) {// con error reabrimos formulario y añadimos mensaje error
             console.log("Error al validar");
-            res.render("quizes/newquiz", { nquiz: nquiz, errors: err.errors, title: "Crea Pregunta rafaQuiz" })
-        }
-        else {
-            console.log("Campo nuevo guardado en db: "+ nquiz);
-            // guarda los campos del formulario pasado en la base de datos 
-            nquiz.save({ fields: ["pregunta", "respuesta"] })
+            res.render("quizes/newquiz", { quiz: quiz, errors: err.errors, title: "Crea Preg/Res rafaQuiz" });
+        } else {//sin error guarda el objeto en bd y reabre pagina todas preguntas
+            console.log("Campo nuevo guardado en db: " + quiz);
+            quiz.save({ fields: ["pregunta", "respuesta"] })
             //y vuelve a mostrar la pagina del indice con datos actualizados
-            .then(function () { res.redirect("/quizes") })
+                .then(function () { res.redirect("/quizes") })
         }
     });
 };
+//--------------editquiz-------------------------------------------------------
+// GET /quizes/(quizId)/edit -- carga objeto req.quiz en autoload
+exports.editquiz = function (req, res) {
+    console.log("Entramos en editquiz")
+    res.render("quizes/editquiz", { quiz: req.quiz, errors: [], title: "edit Preg/Res rafaQuiz" });
+};
+
+//----------------UPDATE-------------------------------------------------------------
+// PUT /quizes/(quizId)-- carga objeto req.quiz en autoload
+exports.update = function (req, res) {
+    console.log("Entramos en update")
+    req.quiz.pregunta = req.body.quiz.pregunta;
+    req.quiz.respuesta = req.body.quiz.respuesta;
+    // Validamos los datos segun models/quiz.js propiedad validate de pregunta y respuesta)
+    req.quiz.validate().then(
+        function (err) {
+            if (err) {
+                console.log("no validado y regresa a ");
+                res.render("quizes/editquiz", { quiz: req.quiz, errors: err.errors, title: "edit Preg/Res rafaQuiz" });
+            } else {//sin error guarda el objeto en bd y reabre pagina todas preguntas
+                req.quiz.save({ fields: ["pregunta", "respuesta"] })
+                    .then(function () {
+                        console.log("validado y guardado, vuelve a quizes: " + req.quiz.pregunta + req.quiz.respuesta);
+                        res.redirect("/quizes");
+                    });
+            }
+        }
+        );
+};
+
 //--------------AUTHOR----------------------------------------------------
 // GET /author
 //exporta la funcion como quiz_controller.author

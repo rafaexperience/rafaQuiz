@@ -397,5 +397,23 @@ QUIZ 10+ EJ. OBLIGATORIO FORMULARIO EN /quizes/index
            * logs no dan error. llega a POST /quizes/create. Reviso layout.ejs. Vale, toneteria, le puse errors.length ===0, quito el igual.
                 Ahora sale mensaje, pero salen dos avisos: Warning "notNull" validation has been deprecated in favor of Schema based "allowNull" 
                 Por lo que entiendo, hay conflicto entre el notNull y alguna configuracion de sequelize. quito notNull de models/quiz.js - solucionado
-       - commit  y envio a github y compruebo en heroku.
+       - commit  y envio a github y compruebo en heroku. ok.
+       
+QUIZ 13 EDITAR PREGUNTAS
+    OBJETIVO: Añadir formulario para editar las preguntas existentes.
+        
+        - Instalo midware method-override v2.3.1) con save para package.json. Añado a app.js require y use.  
+        - Añadimos las rutas GET /quizes/quizId/edit y PUT /quizes/update a routes/index.js. (Paso3b pone POST, pero creo que no es asi, se transforma en formulario).
+        - Añadimos a los controladores de las rutas en quiz_controller.js - .edit y .update
+        - Falta añadir edit.ejs, aqui iba a probar otra cosa. Como en su momento junte newquiz.ejs(=new.ejs en pdf) + _form.ejs en newquiz le cambiaba el nombre
+            y le pasaba los cambios como parametros ( igual que title ), pero tambien cambia la etiqueta action en <form> y ya son muchas variables, asi que lo
+            rehago como viene en las transparencias. con newquiz.ejs + _form.ejs y edit.ejs + _form.ejs. Tambien cambio la variable que llame 
+            nquiz(por no estar confirmada como parte de la db) a quiz, porque ahora la pide _form.ejs. La cambio tanto en quiz_controller .newquiz como en .create.
+        - Solo queda añadir enlace a tabla en views/quizes/index.ejs de boton edit
+        -* comprobamos - no da errores, pero no edita. corrigo en quiz_controller update el paso de variables (me cole el body, 
+            y pasaban los mismos datos que estaban guardados de autoload) - solucionado
+        - Compruebo que se pueden crear preguntas nuevas ( por los cambios todos de variable y _form, etc) - funciona ok - todo parece correcto y sin mensajes
+            extraños en log - commit y envio a github
+             
+
                 

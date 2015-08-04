@@ -16,6 +16,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 // Permite incluir un marco layout común a todas las páginas
 var partials = require('express-partials');
+var methodOverride =require("method-override");
 // conecta con la pagina de inicio /routes/index.ejs
 var routes = require('./routes/index');
 
@@ -34,6 +35,7 @@ app.use(logger('dev')); // supongo que dev sera el usuario que crea la pagina
 app.use(bodyParser.json()); // 
 app.use(bodyParser.urlencoded()); // ver final modulo 4. Codifica url's en utf8
 app.use(cookieParser());
+app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, 'public'))); // devuelve peticiones a recursos que esten en public/
 
 app.use('/', routes); // envia las peticiones a /, a /routes/index.js
