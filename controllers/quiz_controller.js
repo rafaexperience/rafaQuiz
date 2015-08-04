@@ -120,7 +120,13 @@ exports.update = function (req, res) {
         }
         );
 };
-
+//-----------------DESTROY--------------------------------------------------------------
+// DELETE /quizes/(quizId) -- carga objeto req.quiz en autoload
+exports.destroy= function(req, res, next){
+    req.quiz.destroy().then(function(){
+        res.redirect("/quizes");
+    }).catch(function(error){next(error)});
+};
 //--------------AUTHOR----------------------------------------------------
 // GET /author
 //exporta la funcion como quiz_controller.author

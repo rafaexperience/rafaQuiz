@@ -16,15 +16,17 @@ router.get('/', function (req, res) {
 });
 // AUTOLOAD (recoge rutas con parametro quizId)
 router.param("quizId", quizController.load);
-//GET /quizes/..
-// Enviamos las peticiones get de /quizes/.. a quizController --> controllers/quiz_controller.js
+//GET  POST PUT DELETE /quizes/..
+// Enviamos las peticiones a /quizes/.. a quizController --> controllers/quiz_controller.js
 router.get("/quizes/", quizController.index);
 router.get("/quizes/:quizId(\\d+)", quizController.show);
 router.get("/quizes/:quizId(\\d+)/answer", quizController.answer);
 router.get("/quizes/newquiz", quizController.newquiz);
 router.post("/quizes/create", quizController.create);
 router.get("/quizes/:quizId(\\d+)/editquiz", quizController.editquiz);
-router.put("/quizes/:quizId(\\d+)", quizController.update)
+router.put("/quizes/:quizId(\\d+)", quizController.update);
+router.delete("/quizes/:quizId(\\d+)", quizController.destroy);
+
 //GET /author
 // Enviamos peticiones get de /author a quizController
 router.get("/author", quizController.author);

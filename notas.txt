@@ -400,7 +400,7 @@ QUIZ 10+ EJ. OBLIGATORIO FORMULARIO EN /quizes/index
        - commit  y envio a github y compruebo en heroku. ok.
        
 QUIZ 13 EDITAR PREGUNTAS
-    OBJETIVO: Añadir formulario para editar las preguntas existentes.
+    OBJETIVO: Añadir botón para editar las preguntas existentes.
         
         - Instalo midware method-override v2.3.1) con save para package.json. Añado a app.js require y use.  
         - Añadimos las rutas GET /quizes/quizId/edit y PUT /quizes/update a routes/index.js. (Paso3b pone POST, pero creo que no es asi, se transforma en formulario).
@@ -413,7 +413,16 @@ QUIZ 13 EDITAR PREGUNTAS
         -* comprobamos - no da errores, pero no edita. corrigo en quiz_controller update el paso de variables (me cole el body, 
             y pasaban los mismos datos que estaban guardados de autoload) - solucionado
         - Compruebo que se pueden crear preguntas nuevas ( por los cambios todos de variable y _form, etc) - funciona ok - todo parece correcto y sin mensajes
-            extraños en log - commit y envio a github
+            extraños en log - commit y envio a github - todo ok
+            
+QUIZ 14 BORRAR PREGUNTAS
+    OBJETIVO: OBJETIVO: Añadir botón para borrar las preguntas.
+    
+        - Añadimos enlace en views/quizes/index.ejs que realmente sera un formulario que envie el metodo delete, tras confirmación (gestionado en js embutido)
+        - Añadimos a routes/index.js la direccion para DELETE, que reenviará a quiz_controller - destroy
+        - Añadimos a quiz_controller la funcion destroy, que recogerá la petición delete, como lleva id, ya esta cargada por autoload.
+            Tambien le pongo como parametro a la funcion principal de destroy (req, res,next) para que lo gestione el catch.
+        - Probamos. todo perfecto - commit, github y heroku
              
 
                 
