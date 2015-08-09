@@ -511,4 +511,18 @@ QUIZ 15 CREAR COMENTARIO
                que si quiero grabar los datos (que ya borro, el muy...) que los pase a otro branch.
                Al carajo, lo modifico aqui y ya esta.
                
-               - En local todo funciona ok. arreglo commits y paso a github  en rama master
+               - En local todo funciona ok. arreglo commits y paso a github  en rama master. despliego heroku, tambien ok. Sin borrar bd.
+
+QUIZ 16 AUTENTIFICACION Y SESION
+    Objetivo: Añadir gestion de sesion. 
+
+        - Instalamos paquete express-session v1.11.3 con --save
+        - Importamos a variable y activamos en app.js.  Tambien añado  parametro a
+            cookie-parser/("rafaQuiz2015").
+        - Añadimos en app.js el mw para que la sesion este activa en todas las rutas
+            gestionadas por esta app y la direccion a la que vuelve despues del login
+        - Añadimos variable sessionController, para conectar al archivo en carpeta 
+            controller rutas a routes/index.js.Y cambiamos destruir sesion a DELETE, como se supone que deberia.
+        - Creamos archivo en controllers/ session_controller.js y añadimos new y create
+        - Creamos archivo en controllers/ user_controller.js con los datos
+            de los usuarios y .autentificar
