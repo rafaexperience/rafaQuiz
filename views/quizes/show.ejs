@@ -1,5 +1,15 @@
-﻿<form method="get" action="/quizes/<%= quiz.id %>/answer">
-    Pregunta: <%= quiz.pregunta %> <p>
+﻿<!--FORMULARIO PREGUNTA - PARA MOSTRAR QUIZ.PREGUNTA - SE ENVIA A ANSWER PARA CONFIRMAR RESUPUESTA -->
+<div id="hacerPreg">
+    <form method="get" action="/quizes/<%= quiz.id %>/answer">
+        <p>Pregunta: <%= quiz.pregunta %> </p>
         <input type="text" name="respuesta" placeholder="Responda aquí" />
-        <input type="submit" value="Enviar">
-</form>
+        <input class="bot" type="submit" value="Enviar">
+    </form>
+    <p><a href="/quizes/<%= quiz.id %>/comments/new"><button>Nuevo comentario</button></a></p>
+    <p><strong>Comentarios</strong></p>
+
+    <% for(var i in quiz.Comments) {%>
+        <p>- <%= quiz.Comments[i].comentario %></p>
+
+    <% } %>
+</div>

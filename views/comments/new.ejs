@@ -1,0 +1,8 @@
+<!--FORMULARIO COMENTARIO - SE CONECTA A QUIZ SEGUN ID EN RUTA -->
+<div id="coment">
+	<p>Añadir comentario a pregunta: </p>
+	<form method="post" action="/quizes/<%= quizId %>/comments">
+		<p><input type="text" id="comment" name="comment[comentario]" value="-"/></p>
+		<button class="bot" type="submit">Enviar</button>
+	</form>
+</div>

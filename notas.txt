@@ -444,5 +444,71 @@ QUIZ 14+ AÑADIR INDICE TEMATICO
              pero no me convencio. Lo dejo asi por ahora
          Todo funciona, aunque se  puede mejorar el diseño.
          lo envio ya porque ya tuve que hacer la entrega del ejercicio antes de tiempo, aunque nadie lo corrigio aun
+         
+         pd Por cierto, esto lo pongo despues de enviarlo. Borre base de datos postgres  de heroku desde postgres.heroku.com
+            en configuracion (boton arriba derecha y reset database)
+            
+   MEJORAS Y REPARACIONES (HECHAS EN BRANCH PRUEBAS):
+         - Corrijo enlace de views index con href"/quizes/" a "quizes"  por corrección de  Jorge Marcial Álvarez Gago 
+            Si se iba desde ahi y seleccionabas pregunta, te enviaba a quizes/quizes/(id) y fallaba. Se agradece.
+         - El formulario _form no acepta el tema otros (sale aviso de bd-quiz.js). En formulario solo acepta "Otros" y en 
+                definición (models/quiz.js) solo "Otros". Corrijo formulario para "Otros".
+         - Cuando selecciona una pregunta en _form, no sale el tema que tiene guardada, sino la primera de la lista.
+             Añado variable a quiz_controller para pasar como parametro a _form.ejs (al montar newquiz.ejs y editquiz.ejs) y 
+             codigo embebido js con for para que salgan las opciónes segun este array y marque como selected la que coincida
+             con req.quiz.tema. También ordeno los temas para que salgan en orden alfabetico, menos "otros" que irá al final.
+         - Varios retoques html y css. De diseño y añado varios comentarios 
+         
+QUIZ 15 CREAR COMENTARIO
+        OBJETIVO - Añadir tabla para comentarios y asignarlos sus campos a los campos de tabla quiz - 1 pregunta, varios comentarios.
+                Añadir formulario para añadir comentario y que se vean con las preguntas.
+
+		- Creo archivo comments.js en /models, el campo lo llamo comentarios, en vez de texto.
+		- Indicamos path e importamos tabla en models.js. Conectamos con sync ambas tablas dentro de var sequelize
         
-        
+		      	-?? vsCode me saca un fallo por tener la variable Quiz como local y luego exportarla (o algo asi) el error es este:
+                  individuals declarations in merged declarations Quiz must be all exported or all local
+			      Como funciona ok, no lo voy a cambiar, pero puede ser porque el vsCode lo analiza javascript como typescript que 
+                  es una versión mas estricta con los tipos y la estructura, por lo que entendí. En fin, pendiente de ver bien.
+                -?? tambien podriamos hacer la relación entre tablas de forma manual ( creando el campo quizId en comments y guardando
+                   los datos cuando sea). Pendiente de probar
+		- Añadimos rutas a routes/index.js y el enlace (require) con el controlador comment_controller.
+        - Creamos archivo en controllers, comment_controller, que gestionara las peticiones hechas
+            básicamente si newcomment muestra el formulario y desde este manda los datos a create, que los valida y, segun esten ok,
+            los graba o muestra la pagina del formulario con los errores.
+        - Añadimos las vistas. 
+            - Modificamos show.ejs para que muestre los comentarios asignados a cada pregunta
+            - Añadimos carpeta views/comments y creamos archivo new.ejs para crear y añadir los comentarios
+            - Añadimos a funcion AUTOLOAD el parametro para mostrar los comentarios relacionados. Como en vez de find(),
+                 use findById(quizId), solo le añado el parametro include ( espero que no de guerra), de la siguente forma:
+                 ...findById(quizId,{include:[{ model: models.Comment }]})...
+            - borramos quiz.sqlite, para que se cree de nuevo(datos no coinciden) y probamos con foreman
+               -* ko, no encuentra models/comments y es comment. Mal escrito en models.js. corregido, reintento
+               -* ko, Comment.belongTo(Quiz) undefined is not a function. faltaba s belongsTo. corregido, reintento
+               -*  Ahora Se inicializo la bd ok. pruebo en navegador. Hace un extraño, al principio de la página se carga el 
+                   archivo añadido(.ejs interno), aunque lo carga tambien en su sitio, en todas las paginas. reviso index.ejs
+                   Le añadi un comentario: <!--MARCO DE TODAS LAS PÁGINAS - SE AÑADIRAN A <%- body %> (MUESTRA ERRORES SI LOS HAY)-->
+                    y parece que lee la variable, pese a estar entre cometarios, le pongo espacios a las marcas < % - ahora ok.
+               -* Al seleccionar una pregunta, aparece ok boton comentario, pero si lo pulso falla.
+                    ruta: /quizes/1/comments/new (404 no encuentra). En routes/index.js puse comment en vez de comments. Corrigo. sigue ko.
+                    Tambien puse router.get, en vez de post. reinicio y pruebo. No da error, pero no graba. reenvia ok a get quizes/(id)->show
+                    Reviso bd con plugin de firefox sqlite manager, para ver si se grabaron los datos y no se muestran o no se grabaron
+                    Estan grabados, incluso la prueba anterior, pero no se grabo el campo relacionado Comment.QuizId
+                     En commentController .create build lo añadi como quizId. Como en models/comment.js no esta asignado con ningun nombre,
+                     entiendo que se añade en models al hacer Comment.belongsTo(Quiz);Quiz.hasMany(Comment) (no se en cual)
+                     cambio el nombre en build al que asigna automaticamente QuizId. reinicio
+                     Ahora lo guarda ok en bd, pero sigue sin salir, reviso show.ejs. El fallo parece estar en quiz.Comments[]
+                     quiz es el campo de tabla quiz, identificado por id, ok hasta aqui, pero se supone que tiene una propiedad Comments,
+                     que es un array, y no la veo. Ese campo se carga con autoload. Reviso quiz_controller.js.
+                     Parece que el fallo esta aqui: findById(quizId,{include:[{ model: models.Comment }]}). Añado un console.log en 
+                      if (quiz), para ver como es el objeto pasado realmente
+                    
+               MMIIIIEERRRRRRRRRRRRRRRRDA??!!, NO SE QUE PASO, PERO NO SE CAMBIARON LAS MODIFICACIONES PARA EL AUTOLOAD.
+               
+               el .load si, pero los cambios en show y answer, no. Siguen cargando el archivo de la bd, en vez de a traves de autoload
+               por eso en autoload el archivo esta ok, pero en la pagina no coincide.
+               Intento modificar el commit antiguo, con checkout y commit --amend, pero al volver al commit actual no lo graba y me dice
+               que si quiero grabar los datos (que ya borro, el muy...) que los pase a otro branch.
+               Al carajo, lo modifico aqui y ya esta.
+               
+               - En local todo funciona ok. arreglo commits y paso a github  en rama master

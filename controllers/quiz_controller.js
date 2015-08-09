@@ -1,13 +1,19 @@
 ﻿// importamos objeto Quiz = quiz.sqlite a traves de models
 var models = require("../models/models.js");
-
-//-----------------AUTOLOAD-----------------------------------------
+var temasArray=['Ciencia', 'Humanidades','Ocio', 'Tecnología', 'Otros'];
+//-------------------------------------------------AUTOLOAD----------------------------------------------------------------
 // Autoload - se ejecuta si la ruta incluye quizId como parametro (viene de routes/index.js/)
+//   Tambien carga los datos relacionados de comment
 exports.load = function (req, res, next, quizId) { //(peticion http, respuesta http, next=continua al siguiente gestor, parametro identificador de objeto)
-    models.Quiz.findById(quizId).then(//Localiza objeto por id, segun parametro quizId
+    models.Quiz.findById(quizId,{include:[{ model: models.Comment }]}).then(//Localiza objeto por id, segun parametro quizId
         function (quiz) {// envia el objeto localizado a la funcion
             if (quiz) { // Si lo encuentra
+                var descQuiz=JSON.stringify(Object.getOwnPropertyNames(quiz));
+                var QuizContenido=JSON.stringify(quiz);
+                console.log("PROPIEDADES DE (quiz) CARGADO EN AUTOLOAD:"+ descQuiz);
+                console.log("CONTENIDO DE quiz: (PASADO A JSON) "+ QuizContenido);
                 req.quiz = quiz; //lo guarda como req.quiz
+                console.log("CONTENIDO DE REQ.QUIZ: "+ JSON.stringify(req.quiz));
                 next(); //pasa el control a la siguiente funcion(answer o show)
             } else { next(new Error("No existe quizId= " + quizId)); } // pasa el control a funcion pasandole el parametro error con un mensaje
         }
@@ -16,8 +22,8 @@ exports.load = function (req, res, next, quizId) { //(peticion http, respuesta h
         next(error);
     });
 };
-//------------------INDEX------------------------------------------
-// GET /quizes/
+//----------------------------------------------------/QUIZES--------------------------------------------------------------------
+//------------------GET INDEX------------------------------------------
 exports.index = function (req, res, next) {
     //formato busqueda {where: {pregunta: {$like: '%de%Italia%'}}} -- var locales--> busqueda=objeto filtro, searchLoc=string a buscar
     //Siempre le enviamos objeto filtro, si no tenemos fitro, ira vacio y no hará ningun filtro
@@ -37,43 +43,35 @@ exports.index = function (req, res, next) {
         next(error);
     })
 };
-//----------------SHOW--------------------------------------------------
+//----------------GET QUIZES/SHOW--------------------------------------------------
 // GET /quizes/(quizId) Ej: ./quizes/1  -- carga objeto req.quiz en autoload
 //exporta la funcion show
 exports.show = function (req, res) {
-    //busca por id en la bd y pasa el objeto como parametro quiz
-    models.Quiz.findById(req.params.quizId).then(function (quiz) {
         //monta la pagina quizes/show con la pregunta como objeto 
-        res.render("quizes/show", { quiz: quiz, errors: [], title: "Preg rafaQuiz" }); //show.ejs muesta la pregunta
-    })
+        res.render("quizes/show", { quiz: req.quiz, errors: [], title: "Preg rafaQuiz" }); //show.ejs muesta la pregunta
 };
-//---------------ANSWER--------------------------------------------------
-// GET /quizes/(quizId)/answer-- carga objeto req.quiz en autoload
+//---------------GET QUIZES/(quizId)/ANSWER--------------------------------------------------
+// lleva quizId, asi que carga objeto req.quiz en autoload
 //exporta la funcion .answer
 exports.answer = function (req, res) {
-    //busca por id en la bd y pasa el objeto (pregunta, respuesta) como parametro quiz
-    models.Quiz.findById(req.params.quizId).then(function (quiz) {
+
         //guardamos respuesta error, para enviar como parametro
         var resp = "¿¿Que dices?? ..tarao";
         // Si es la correcta cambiamos el mensaje respuesta
-        if (req.query.respuesta === quiz.respuesta) {
+        if (req.query.respuesta === req.quiz.respuesta) {
             resp = "¡¡ Asin es !!";
         };
         //monta la pagina quizes/answer y le envia respuesta con el valor correspondiente, el titulo, error,y el objeto quiz 
-        res.render("quizes/answer", { quiz: quiz, respuesta: resp, errors: [], title: "Resp rafaQuiz" });
-
-    })
+        res.render("quizes/answer", { quiz: req.quiz, respuesta: resp, errors: [], title: "Resp rafaQuiz" });
 };
-//--------------NEWQUIZ-- O NEW ----------------------------------------
-// GET /quizes/newquiz
+//--------------GET QUIZES/NEWQUIZ-- (O NEW EN ORIGINAL) ------------------------
 exports.newquiz= function(req,res){
     var quiz=models.Quiz.build(
-        {pregunta: "Pregunta", respuesta: "respuesta", tema:"Otros"}
+        {pregunta: "-", respuesta: "-", tema:"Otros"}
     );
-    res.render("quizes/newquiz",{quiz:quiz, errors: [], title: "Crea Preg/Res rafaQuiz"})
+    res.render("quizes/newquiz",{quiz:quiz,temasArray:temasArray, errors: [], title: "Crea Preg/Res rafaQuiz"})
 }
-//-------------------CREATE---------------------------------------------
-// POST /quizes/create
+//-------------------POST QUIZES/CREATE---------------------------------------------
 exports.create = function (req, res) {
     console.log(req.body.quiz);
     // creamos modelo del campo quiz a grabar
@@ -82,7 +80,7 @@ exports.create = function (req, res) {
     quiz.validate().then(function (err) {
         if (err) {// con error reabrimos formulario y añadimos mensaje error
             console.log("Error al validar");
-            res.render("quizes/newquiz", { quiz: quiz, errors: err.errors, title: "Crea Preg/Res rafaQuiz" });
+            res.render("quizes/newquiz", { quiz: quiz, temasArray:temasArray, errors: err.errors, title: "Crea Preg/Res rafaQuiz" });
         } else {//sin error guarda el objeto en bd y reabre pagina todas preguntas
             console.log("Campo nuevo guardado en db: " + quiz);
             quiz.save({ fields: ["pregunta", "respuesta","tema"] })
@@ -91,15 +89,15 @@ exports.create = function (req, res) {
         }
     });
 };
-//--------------editquiz-------------------------------------------------------
-// GET /quizes/(quizId)/edit -- carga objeto req.quiz en autoload
+//--------------/QUIZES/(quizId)/EDITQUIZ-------------------------------------------------------
+// lleva quizId, asi que carga objeto req.quiz en autoload
 exports.editquiz = function (req, res) {
     console.log("Entramos en editquiz")
-    res.render("quizes/editquiz", { quiz: req.quiz, errors: [], title: "edit Preg/Res rafaQuiz" });
+    res.render("quizes/editquiz", { quiz: req.quiz, temasArray:temasArray, errors: [], title: "edit Preg/Res rafaQuiz" });
 };
 
-//----------------UPDATE-------------------------------------------------------------
-// PUT /quizes/(quizId)-- carga objeto req.quiz en autoload
+//----------------PUT QUIZES/(quizId)/UPDATE-------------------------------------------------------------
+// lleva quizId, asi que carga objeto req.quiz en autoload
 exports.update = function (req, res) {
     console.log("Entramos en update")
     req.quiz.pregunta = req.body.quiz.pregunta;
@@ -110,7 +108,7 @@ exports.update = function (req, res) {
         function (err) {
             if (err) {
                 console.log("no validado y regresa a ");
-                res.render("quizes/editquiz", { quiz: req.quiz, errors: err.errors, title: "edit Preg/Res rafaQuiz" });
+                res.render("quizes/editquiz", { quiz: req.quiz, temasArray:temasArray, errors: err.errors, title: "edit Preg/Res rafaQuiz" });
             } else {//sin error guarda el objeto en bd y reabre pagina todas preguntas
                 req.quiz.save({ fields: ["pregunta", "respuesta", "tema"] })
                     .then(function () {
@@ -121,14 +119,14 @@ exports.update = function (req, res) {
         }
         );
 };
-//-----------------DESTROY--------------------------------------------------------------
-// DELETE /quizes/(quizId) -- carga objeto req.quiz en autoload
+//-----------------DELETE QUIZES------------------------------------------------------------
+// lleva quizId, asi que carga objeto req.quiz en autoload
 exports.destroy= function(req, res, next){
     req.quiz.destroy().then(function(){
         res.redirect("/quizes");
     }).catch(function(error){next(error)});
 };
-//--------------AUTHOR----------------------------------------------------
+//------------------GET AUTHOR----------------------------------------------------
 // GET /author
 //exporta la funcion como quiz_controller.author
 exports.author = function (req, res) {

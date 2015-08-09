@@ -6,6 +6,7 @@ var router = express.Router();
 //asignamos a variable quizController las funciones exportadas en archivo /controllers/quiz_controller.
 //  .question y .answer
 var quizController = require("../controllers/quiz_controller");
+var commentController = require("../controllers/comment_controller")
 
 // GET /home
 // acepta peticion GET / o /index y envia la pagina index.js con la variable title con valor "rafaQuiz"
@@ -14,11 +15,14 @@ router.get('/', function (req, res) {
     //con parametros (variables en ejs=<%=var%>)
   res.render('index', { title: 'rafaQuiz', errors: [] });
 });
+
 // AUTOLOAD (recoge rutas con parametro quizId)
 router.param("quizId", quizController.load);
+
+
 //GET  POST PUT DELETE /quizes/..
 // Enviamos las peticiones a /quizes/.. a quizController --> controllers/quiz_controller.js
-router.get("/quizes/", quizController.index);
+router.get("/quizes", quizController.index);
 router.get("/quizes/:quizId(\\d+)", quizController.show);
 router.get("/quizes/:quizId(\\d+)/answer", quizController.answer);
 router.get("/quizes/newquiz", quizController.newquiz);
@@ -26,6 +30,12 @@ router.post("/quizes/create", quizController.create);
 router.get("/quizes/:quizId(\\d+)/editquiz", quizController.editquiz);
 router.put("/quizes/:quizId(\\d+)", quizController.update);
 router.delete("/quizes/:quizId(\\d+)", quizController.destroy);
+
+//GET  POST PUT DELETE /comment/..
+// Enviamos las peticiones a /comment/.. a commentController --> controllers/comment_controller.js
+router.get("/quizes/:quizId(\\d+)/comments/new", commentController.newcomment);
+router.post("/quizes/:quizId(\\d+)/comments", commentController.create);
+
 
 //GET /author
 // Enviamos peticiones get de /author a quizController

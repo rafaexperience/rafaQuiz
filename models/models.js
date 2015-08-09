@@ -30,12 +30,25 @@ var sequelize = new Sequelize(DB_name, user, paswd,
     omitNull: true      // solo Postgres
 }
 );
-
-//Aplicamos la definicion de datos al objeto de la base de datos creada (quiz.js -->sequelize || postgres)
+//-------------- DEFINIMOS TABLAS -------------------
+//Aplicamos la definicion de datos de la tabla quiz al objeto de la base de datos creada (quiz.js -->sequelize || postgres)
 //Hacemos visible Quiz para el resto del codigo; models/quiz.js (module.exports)
-Quiz = sequelize.import(path.join(__dirname, "quiz"));
+var Quiz = sequelize.import(path.join(__dirname, "quiz"));
 exports.Quiz=Quiz;
-//sync crea (o se conecta) con  bd. y ejecuta then()Cuando es exitoso
+//------
+//Aplicamos la definicion de datos de la tabla comment al objeto de la base de datos creada (comment.js -->sequelize || postgres)
+var Comment = sequelize.import(path.join(__dirname, "comment"));
+// Indicamos la relación entre "preguntas"(Quiz) y "comentarios" - Una pregunta puede tener varios comentarios
+// Esto añade campo QuizId en comments para relacionarlos 
+Comment.belongsTo(Quiz);
+Quiz.hasMany(Comment)
+//Hacemos visible Comment para el resto del codigo; models/comment.js (module.exports)
+exports.Comment=Comment;
+
+//--------------- CONECTAMOS TABLAS ------------------
+
+//sync crea (o se conecta) con bd=sequelize y usa tanto Quiz como Comments.Ejecuta then()Cuando es exitoso
+// creando campos en tabla Quiz. si esta vacia
 sequelize.sync().then(function () {
     Quiz.count().then(function (count) {
         if (count === 0) {
@@ -47,3 +60,5 @@ sequelize.sync().then(function () {
         };
     });
 });
+
+

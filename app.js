@@ -31,16 +31,17 @@ app.set('view engine', 'ejs');
 // aplicamos y configuramos los modulos
 app.use(partials());
 app.use(logger('dev')); // supongo que dev sera el usuario que crea la pagina
-//elimino serve-favicon, por usar otro metodo
-app.use(bodyParser.json()); // 
+//elimino serve-favicon, por que lo incluyo directo en pagina (layout.ejs)
+app.use(bodyParser.json()); //  Analiza el cuerpo de la petición http
 app.use(bodyParser.urlencoded()); // ver final modulo 4. Codifica url's en utf8
-app.use(cookieParser());
-app.use(methodOverride("_method"));
+app.use(cookieParser()); //Gestiona las cookies
+app.use(methodOverride("_method")); // Permite cambiar una peticion http en otra Ej - POST --> DELETE
 app.use(express.static(path.join(__dirname, 'public'))); // devuelve peticiones a recursos que esten en public/
 
-app.use('/', routes); // envia las peticiones a /, a /routes/index.js
+app.use('/', routes); // envia las peticiones de /, a /routes/index.js
 //http://localhost:3000 devuelve "Welcome to rafaQuiz"
 //http://localhost:3000/users devuelve 404 y muestra pagina error desarrollo
+//   ahora está modificado y lo gestiona segun archivo routes/index.js
 
 // GESTION DE ERRORES - SI ACCEDE A RECURSOS QUE NO EXISTEN O LA APLICACION-SERVIDOR FALLA
 
@@ -81,4 +82,4 @@ app.use(function (err, req, res, next) {
 });
 
 
-module.exports = app;// muestra app para todas las aplicaciones
+module.exports = app;// muestra app para todas las aplicaciones (que apliquen require)

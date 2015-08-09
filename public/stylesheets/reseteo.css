@@ -91,7 +91,7 @@ audio {
     }
 
     #page-wrap section > div {
-        padding: 20px;
+        padding: 0 10px;
     }
 
     #page-wrap header,
@@ -101,6 +101,10 @@ audio {
         background: #eee;
         text-align: center;
     }
+.bot{
+    font-size: 17px;
+    text-decoration:none;   
+}
 
 #ErrorMsg{
     width: 300px;
@@ -112,7 +116,7 @@ audio {
 }
 
 #n1 {
-    min-height: 15px;
+    height: 50%;
 }
 
     #n1 span a { /*da relieve a h1 y todos los enlaces*/
@@ -144,25 +148,28 @@ audio {
     #f1 a img {
         vertical-align: text-bottom;
     }
-#quizesindex a{
-    display: inline-block;
-    width:300px;
-    margin: 10px;
+
+#formBusqP span,
+#formBusqP input{
+    font-size: 17px;
+    margin: 10px 0;
 }
 #listapreg{
-    width:90%;
-    margin: auto;
+    width:95%;
+    margin: 10px auto;
+    padding: 4px;
     border: 5px solid #dd6600;
 }
+
 #listapreg table{
     width:100%;
 }
     #listapreg table tr td {
         height:30px;
+        font-size: 20px;
     }
-#listapreg table tr td a{
-        font-size:20px;
-}
+   
+
 #contfp h2{
     margin: 10px;    
 }
@@ -170,10 +177,11 @@ audio {
     display: flexbox;
 }
 #formpreg p label{
+    font-weight: bold;
     margin: 7px auto;
     display: inline-block;
     height: 20px;
-    width: 105px;
+    width: 90px;
 }
 #preg,
 #resp {
@@ -182,21 +190,21 @@ audio {
     width: 250px;
     padding: 2px 4px;
 }
-
-#formpreg p a{
-    display: inline-block;
-    align-items: flex-end;
-    width: 295px;
+#hacerPreg p{
+    font-size: 22px; 
+    margin: 5px auto;
+}
+#coment p{
+    font-size: 22px; 
+    margin: 5px auto;
 }
 .ficha {
     background-color: burlywood;
     display: flex;
     padding: 2%;
     margin: 2%;
+    align-content: center;
     align-items: center;
-    -ms-align-content: space-around;
-    -webkit-align-content: space-around;
-    align-content: space-around;
 }
 
 .fichaitem {
@@ -210,13 +218,13 @@ audio {
 }
 
 .foto {
-    max-height: 250px;
-    height: auto;
-    width: auto;
+width: auto;
 }
-
+.video {
+width: 250px;
+}
 .videoin {
-    max-height: 250px;
+    max-height: 300px;
     height: 100%;
     width: 100%;
 }

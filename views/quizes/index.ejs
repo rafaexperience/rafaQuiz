@@ -1,20 +1,32 @@
-﻿<div id="quizesindex">
+﻿<!--MUESTRA TODAS LAS PREGUNTAS (INCLUYE FORM DE BUSQUEDA PARA FILTRARLAS (CAMBIA quizes[])) -->
+<div id="quizesindex">
+    <div id="formBusqP">
+        <form method="get" action="/quizes">
+            <span>Buscar:</span>
+            <input type="text" name="search" placeholder="Escriba busqueda" />
+            <input class="bot" type="submit" value="Enviar" />
+        </form>
+    </div>
+    <a  href="/quizes/newquiz"><button class="bot" type="button">Crear pregunta</button></a>
     <div id="listapreg">
         <table>
             <% for (var i=0; i < quizes.length; i++) { %>
                 <tr>
+                   <th>
+                        <p><%= quizes[i].tema %></p>
+                    </th>
+                   </tr> 
+                   <tr>
                     <td>
                         <a href="quizes/<%= quizes[i].id %>"><%= quizes[i].pregunta %></a>
                     </td>
-                                        <td>
-                        <a href="quizes/<%= quizes[i].id %>"><%= quizes[i].tema %></a>
+
+                    <td>
+                        <a class="bot" href="quizes/<%= quizes[i].id %>/editquiz"><button class="bot" >Edit</button></a>
                     </td>
                     <td>
-                        <a href="quizes/<%= quizes[i].id %>/editquiz"><button>Edit</button></a>
-                    </td>
-                    <td>
-                        <form method="post" action="quizes/<%= quizes[i].id %>?_method=delete">
-                            <button type="submit" onclick="return confirm('Borrar: <%= quizes[i].pregunta %>');">
+                        <form class="bot" method="post" action="quizes/<%= quizes[i].id %>?_method=delete">
+                            <button class="bot" type="submit" onclick="return confirm('Borrar: <%= quizes[i].pregunta %>');">
                                 Borrar
                             </button>
                         </form>
@@ -23,12 +35,5 @@
                 <% } %>
         </table>
     </div>
-    <div id="formBusqP">
-        <form method="get" action="/quizes">
-            <p>Buscar:</p>
-            <input type="text" name="search" placeholder="Escriba busqueda" />
-            <input type="submit" value="Enviar" />
-        </form>
-    </div>
-    <a href="/quizes/newquiz"><button type="button">Crear pregunta</button></a>
+
 </div>

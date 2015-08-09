@@ -13,7 +13,7 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             validate: {
                  notEmpty: {msg: "-- Falta Tema --"},
-                 isIn: { args: [['Otros', 'Humanidades','Ocio', 'Ciencia', 'Tecnología' ]],
+                 isIn: { args: [['Ciencia', 'Humanidades','Ocio', 'Tecnología', 'Otros']],
                          msg: "Solo los temas indicados"}
                       }
               }

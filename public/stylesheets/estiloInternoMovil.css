@@ -15,7 +15,15 @@
     #page-wrap footer, input {
         font-size: large;
     }
+.bot{
+    font-size: 15px;
+    margin: 5px;
+    width: 100px;
+    }
 
+#s1 {
+    min-height: 150px;
+}
 #n1 span a {
     margin: 5px auto;
 }
@@ -24,7 +32,40 @@
     margin: 5px 20px;
     display: block;
 }
+#quizesindex a{
+    width: 100px;
+    margin: 3px auto;
+}
+#quizesindex .bot{
 
+    width: 100px;
+    margin: 3px auto;
+}
+#listapreg .bot{
+    font-size: 12px;
+    margin: 3px;
+    width: 50px;
+    }
+#listapreg th p{
+    text-align: left;
+    background-color: lightgrey;
+    height: 20px;
+    margin: 5px;
+    }
+#formBusqP input{
+    font-size: 15px;
+    display: block;
+    margin: 5px auto;
+}
+#formpreg p label{
+    margin: 3px auto;
+    display: inline-block;
+    font-size: 20px;
+}
+#preg,
+#resp {
+    width: 200px;
+}
 .ficha {
     display: block;
     align-items: center;
@@ -35,26 +76,14 @@
     margin: auto;
 }
 
-#formBusqP input{
-    font-size: 15px;
-    display: block;
-    margin: 5px auto;
-}
-#quizesindex a{
-    display: block;
-    margin: 5px auto;
-}
 
 .foto {
     max-height: 200px;
+    max-width: 200px;
     margin: 3%;
 }
 
 .video {
-    margin: 1%;
+width: 200px;
 }
 
-.videoin {
-    height: 100%;
-    width: 235px;
-}
