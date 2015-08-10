@@ -16,7 +16,10 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 // Permite incluir un marco layout común a todas las páginas
 var partials = require('express-partials');
+// Permite transformar una petición http a otra: Ej POST -->DELETE
 var methodOverride =require("method-override");
+// Ayuda para gestionar sesiones de usuario (usa cookies)
+var session =require("express-session");
 // conecta con la pagina de inicio /routes/index.ejs
 var routes = require('./routes/index');
 
@@ -34,9 +37,25 @@ app.use(logger('dev')); // supongo que dev sera el usuario que crea la pagina
 //elimino serve-favicon, por que lo incluyo directo en pagina (layout.ejs)
 app.use(bodyParser.json()); //  Analiza el cuerpo de la petición http
 app.use(bodyParser.urlencoded()); // ver final modulo 4. Codifica url's en utf8
-app.use(cookieParser()); //Gestiona las cookies
+app.use(cookieParser("rafaQuiz2015")); //Gestiona las cookies-param=semilla para codif.
+app.use(session()); // gestión de sesiones
 app.use(methodOverride("_method")); // Permite cambiar una peticion http en otra Ej - POST --> DELETE
 app.use(express.static(path.join(__dirname, 'public'))); // devuelve peticiones a recursos que esten en public/
+
+// Helpers dinamicos (para sesiones)
+app.use(function(req, res, next){
+    console.log("PASO POR HELPER PARA SESION");
+    // guardar path en req.session.redir para volver tras login
+    if(!req.path.match(/\/login|\/logout/)){
+        console.log("MODIFICAMOS REDIR DE " + req.session.redir + " A " + req.path);
+        req.session.redir=req.path; 
+    }
+    //Hacer visible req.session en las vistas (en res, mas bien)
+    res.locals.session=req.session;
+    console.log("datos de res.locals.session: " + JSON.stringify(res.locals.session));
+    next();// envia al siguiente gestor, segun ruta
+});
+
 
 app.use('/', routes); // envia las peticiones de /, a /routes/index.js
 //http://localhost:3000 devuelve "Welcome to rafaQuiz"

@@ -511,4 +511,33 @@ QUIZ 15 CREAR COMENTARIO
                que si quiero grabar los datos (que ya borro, el muy...) que los pase a otro branch.
                Al carajo, lo modifico aqui y ya esta.
                
-               - En local todo funciona ok. arreglo commits y paso a github  en rama master
+               - En local todo funciona ok. arreglo commits y paso a github  en rama master. despliego heroku, tambien ok. Sin borrar bd.
+
+QUIZ 16 AUTENTIFICACION Y SESION
+    Objetivo: Añadir gestion de sesion. 
+
+        - hago desde portatil rama linux y siguo desde ella
+        - Instalamos paquete express-session v1.11.3 con --save
+        - Importamos a variable y activamos en app.js.  Tambien añado  parametro a cookie-parser/("rafaQuiz2015").
+        - Añadimos en app.js el mw para que la sesion este activa en todas las rutas gestionadas por esta app y la direccion a la que vuelve
+            despues del login.
+        - Añadimos variable sessionController, para conectar al archivo en carpeta controller rutas a routes/index.js.Y cambiamos
+             destruir sesion a DELETE, como se supone que deberia.
+        - Creamos archivo en controllers/ session_controller.js y añadimos new y create
+        - Creamos archivo en controllers/ user_controller.js con los datos de los usuarios y .autentificar que comprueba los datos enviados
+            con la variable que contiene los datos de usuarios ( Seria preferible guardarlos en tb en db )
+        - Modificamos vistas -
+            - Añadimos boton de login en layout (saldra en todas las páginas de la applicación)
+            - Creamos carpeta views/sessions y añadimos archivo new.ejs formulario para crear sesión.
+        -* comprobamos con foreman start - no entra en /index compruebo layout.ejs - tenia el if al reves (sin !) lo cambio. Entra ok- 
+        -* Entra ok en login pero al enviar da error undefined is not a function, en session_controller.js. Reviso parte .create 
+            puse mal error en user_controller - autentication - modifico para que esten iguales.
+        -* se logea ok, pero te deja en la pagina de login, que es la que se guarda en redir. No tiene mucho sentido, seguir en esa
+            página cuando ya estas logeado. Al darle a logout, no encuentra direccion yno borra - el enlace de layout le envia a GET /logout y 
+            está cambiado a DELETE /logout, cambio enlace por formulario aunque posiblemente el reenvio sigua fallando, porque redir graba
+            ahora /logout y al mandarlo con redirect a rdir ira como get.
+            cambio enlace logout a formulario que transforma POST EN DELETE (por ahora es un boton, no un enlace), pero falla redirect, que
+            lo envia a redir=/logout. redir se cambia cada vez que se cambia de pagina, incluyendo /login y logout - reviso regexp en app.js - ko corrigo
+            Ahora reenvia ok. ya no modifica redir si la pagina donde esta es login o logout. todo ok
+         - modifico logout como boton a enlace - ok
+         - Funciona ok en local. mezclo rama linux con master y paso a github, y deploy en heroku

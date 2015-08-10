@@ -105,7 +105,38 @@ audio {
     font-size: 17px;
     text-decoration:none;   
 }
+#log {
+    font-family: "Verdana";
+    font-size: 20px;
+    font-weight: bold;
+	text-align: right;
+}
+#log span,
+#log form,
+#log a {
+     display: inline;}
+.botonComoEnlace, #log a
 
+{
+display: inline;
+			color: blue;
+			background: none;
+			margin: 0;
+			padding: 0;
+			border: none;
+			cursor: pointer;
+			text-decoration: underline;
+			-ms-user-select: text;
+
+
+		}
+		.botonComoEnlace span {
+			text-decoration: underline;
+		}
+		.botonComoEnlace:hover span,
+		.botonComoEnlace:focus span {
+			color: black;
+		}
 #ErrorMsg{
     width: 300px;
     background-color: red;
@@ -174,7 +205,7 @@ audio {
     margin: 10px;    
 }
 #formpreg{
-    display: flexbox;
+    display: flex ;
 }
 #formpreg p label{
     font-weight: bold;

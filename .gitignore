@@ -12,6 +12,7 @@ node_modules
 obj
 .settings
 #ARCHIVOS CONCRETOS
+prueba.js
 .ntvs_analysis.dat
 .ntvs_analysis.dat.tmp
 public/images/Thumbs.db

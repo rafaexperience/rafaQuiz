@@ -28,7 +28,8 @@ exports.index = function (req, res, next) {
     //formato busqueda {where: {pregunta: {$like: '%de%Italia%'}}} -- var locales--> busqueda=objeto filtro, searchLoc=string a buscar
     //Siempre le enviamos objeto filtro, si no tenemos fitro, ira vacio y no hará ningun filtro
     var busqueda={};
-    console.log("Variable busqueda en /quizes, segun se graba en req: "+ req.query.search);//mostramos por consola parametro en la ruta
+
+    console.log("Variable busqueda en /quizes: "+ req.query.search);//mostramos por consola parametro en la ruta
     //Si hay query.search (no undefined=true) adaptamos la query(string) como parametro de where(filtro)
     if (req.query.search) {
         var searchLoc="%"+(req.query.search.replace(/ /g, "%"))+"%";
