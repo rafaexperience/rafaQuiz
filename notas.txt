@@ -540,4 +540,38 @@ QUIZ 16 AUTENTIFICACION Y SESION
             lo envia a redir=/logout. redir se cambia cada vez que se cambia de pagina, incluyendo /login y logout - reviso regexp en app.js - ko corrigo
             Ahora reenvia ok. ya no modifica redir si la pagina donde esta es login o logout. todo ok
          - modifico logout como boton a enlace - ok
-         - Funciona ok en local. mezclo rama linux con master y paso a github, y deploy en heroku
+         - Funciona ok en local. mezclo rama linux con master y paso a github, y deploy en heroku - parece ok.
+
+QUIZ 17 AUTORIZACION
+    Objetivo: Añadir control de accesos para que solo usuarios logeados puedan crear, 
+        editar o borrar preguntas.
+
+        - Añadimos mw .loginRequired a session_controller.js. Solo permite acceder si req.session.user existe ( Se crea al iniciar sesion en create) sino reenvia a GET /login.
+        - Añadimos rutas a routes/index.js que necesiten login.
+        - Modificamos views/quizes/index.ejs para que solo muestren los botones para modificar si estan autentificados. (si existe session.user). modificamos edit y borrar de tabla y crear, que esta encima de tabla
+        - probamos ko - Lo nuevo funciona, pero si te logeas desde quizes, al poner los datos y enviar te manda a /favicon.ico, lo que es curioso...
+        Parece que se graba /favicon.ico en redir al entrar en login, reintento para confirmar y ahora sale ok ???.
+        
+           * Vuelve a fallar favicon. Y a veces hace un extraño, como si en redir se grabara "/favicon.ico" y al redireccionar dice que no lo encontro, 
+            ademas el favicon no lo muestra en titulo, sin embargo si pongo la direccion del favicon en la barra sale ok.
+            otras veces funciona ok. Investigando ,parece que firefox busca 2 veces el favicon, porque internet explorer buscaba por defecto el icono en 
+            la carpeta de inicio,o algo asi. De todos modos, a veces funciona ok.No se si tendrá que ver con la cache o algo asi, voy a probar a hacerlo mas standard,
+             pongo el favicon.ico en el home public/ y cambio el enlace de layout.
+             En local falla cuando arranco el navegador, parece y despues lo encuentra siempre (creo).
+             De todos modos, le voy a añadir a app.js, en el patron para que no guarde la direccion de login (o logout), la direccion del icono, para evitar que 
+             se grabe en redir y por lo menos, el problema no pase de mostrar o no el favicon
+             Sigue sin mostrar favicon, pruebo algunas cosas que fui leyendo:
+                Rehago el icono con una pagina para hacerlos online, http://favicon.htmlkit.com/favicon/ y de paso, lo pongo animado.
+                Meto el <link> encima de title (no arregla nada, pero ya lo dejo ahi)
+                Le pongo despues del nombre  una interrogación, que parece que lo obliga a confirmar la versión y lo regarga, o asi.
+                
+             Ahora sale siempre el antiguo, borro cache y paginas si conexion sale el animado, funciona ok. Dejo animado indicado en pagina y guardo archivo
+             .ico en public/ sin indicar nada en layout.ejs (si no carga uno, cargara el otro)
+             pruebo otros navegadores, parece que va ok ( Efectivamente firefox, repite la busqueda de favicon.ico  de forma automatica)
+             A veces animado, otros no, pero parece que sale ok tambien en heroku
+             le añado un min-with porque chrome y explorer la encogen demasiado y el titulo se va del sitio
+         Por ahora ok. A ver si dura.... 
+         
+
+
+    

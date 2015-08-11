@@ -29,11 +29,11 @@ router.delete("/logout", sessionController.destroy); // cerrar sesion
 router.get("/quizes", quizController.index);
 router.get("/quizes/:quizId(\\d+)", quizController.show);
 router.get("/quizes/:quizId(\\d+)/answer", quizController.answer);
-router.get("/quizes/newquiz", quizController.newquiz);
-router.post("/quizes/create", quizController.create);
-router.get("/quizes/:quizId(\\d+)/editquiz", quizController.editquiz);
-router.put("/quizes/:quizId(\\d+)", quizController.update);
-router.delete("/quizes/:quizId(\\d+)", quizController.destroy);
+router.get("/quizes/newquiz", sessionController.loginRequired, quizController.newquiz);
+router.post("/quizes/create", sessionController.loginRequired, quizController.create);
+router.get("/quizes/:quizId(\\d+)/editquiz", sessionController.loginRequired, quizController.editquiz);
+router.put("/quizes/:quizId(\\d+)", sessionController.loginRequired, quizController.update);
+router.delete("/quizes/:quizId(\\d+)", sessionController.loginRequired, quizController.destroy);
 
 //GET  POST PUT DELETE quizes/comment/..  COMENTARIOS
 // Enviamos las peticiones a quizes/comment/.. a commentController --> controllers/comment_controller.js

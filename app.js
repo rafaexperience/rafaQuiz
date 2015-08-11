@@ -46,7 +46,7 @@ app.use(express.static(path.join(__dirname, 'public'))); // devuelve peticiones 
 app.use(function(req, res, next){
     console.log("PASO POR HELPER PARA SESION");
     // guardar path en req.session.redir para volver tras login
-    if(!req.path.match(/\/login|\/logout/)){
+    if(!req.path.match(/\/login|\/logout|\/*\.ico/)){
         console.log("MODIFICAMOS REDIR DE " + req.session.redir + " A " + req.path);
         req.session.redir=req.path; 
     }

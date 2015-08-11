@@ -36,3 +36,11 @@ exports.destroy = function(req,res){
 	//redirecciona a path guardado en app.js
 	res.redirect(req.session.redir.toString());
 };
+// AÑADIR EN RUTAS QUE REQUIERAN AUTORIZACION
+exports.loginRequired = function(req,res,next){
+	if(req.session.user){
+		next();
+	} else{
+		res.redirect("/login");
+	}
+};
