@@ -1,12 +1,22 @@
 /// <reference path="../typings/node/node.d.ts"/>//referencia para que vsCode identifique process
 // Esto es un archivo javascript, aunque indica el path para node con comando del shell
-// Si pongo comentario encima no entiende el c�digo # -- unexpected token illegal
-//carga el modulo node debug con el nombre de la aplicacion
+// Si pongo comentario encima no entiende el código # -- unexpected token illegal
+
+//cargamos  modulos node  y asignamos a variables
 // debug sirve para enviar mensajes a la consola desde la aplicacion
 var debug = require('debug')('rafaQuiz');
 
 // Asigna a la variable app el archivo app.js
 var app = require('../app');
+// permite leer archivos
+var fs= require("fs");
+//permite añadir seg https (capa ssl)
+var https=require("https")
+
+var options= {
+  key:fs.readFileSync("certs/quiz-2015-key.pem").toString(),
+  cert:fs.readFileSync("certs/quiz-2015-cert.pem").toString()
+};
 
 // configura el puerto 3000 en el entorno (local) de la aplicacion app
 app.set('port', process.env.PORT || 3000);
@@ -15,4 +25,10 @@ app.set('port', process.env.PORT || 3000);
 // y envia mensaje a traves de debug ( Al hacer ejecutar la aplicación por foreman no aparece)
 var server = app.listen(app.get('port'), function() {
   debug('Express server listening on port ' + server.address().port);
+});
+
+//se prepara puerto seguro
+var serverSecure = https.createServer(options, app);
+serverSecure.listen(8443, function(){
+  debug("Express server listening on port " + server.address().port);
 });

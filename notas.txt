@@ -586,3 +586,11 @@ QUIZ 18 PUBLICAR COMENTARIOS
             y, si (es usuario logueado) Y (la propiedad publicado = false), muestre el boton publicar
         - todo ok, commit, subimos github y pasamos a heroku
             
+QUIZ 19 HTTPS - SERVIDOR SEGURO
+    Objetivo: Añadir acceso https a la aplicación para codificar acceso
+        
+        - en la herramienta de desarrollador, opcion red, de firefox te indica que hay campos de contraseña en pagina insegura http y te avisa del riesgo.
+            Lo comento como curiosidad, que lo acabo de ver al entrar en login. Tanto el usuario como la contraseña salen en el POST, entrando en parámetros.
+            Sin embargo en heroku no te avisa, puede que entienda que como esta en https, no enviarias las contraseñas si codificar o algo.
+        - Creo el archivo commands_to_generate_keys.txt y lo ejecuto en el git-bash de windows necesita el archivo /usr/local/ssl/openssl.cnf
+        
