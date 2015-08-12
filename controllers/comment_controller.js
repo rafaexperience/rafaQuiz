@@ -1,5 +1,21 @@
 var models = require("../models/models.js");
+
+//---------------------------------------AUTOLOAD - COMMENTS---------------------------------------------------------
+//Carga los comentarios antes que la pagina
+exports.load = function(req,res,next,commentId){
+	//busca el commentario en tb de bd segun commentId y pasa ese campo como comment
+	models.Comment.findById(commentId).then(function(comment){
+		//si el campo pasado es true - no esta vacio, o mal pasado
+		if(comment){
+			req.comment = comment; // añade el comentario a req para que sea accesible
+			next(); //sigue con lo que toque
+		} else{//si no guarda un error con mensaje y sigue por error
+			next(new Error("No existe commentId="+commentId));
+		}
+	}).catch(function(error){next(error)});
+}
 //---------------------------------------QUIZES/COMMENTS------------------------------------------------------------
+
 // GET /QUIZES/(quizId)/COMMENTS/NEW
 exports.newcomment=function(req, res){
 	res.render("comments/new", {quizId: req.params.quizId, errors: [], title: "new Coment rafaQuiz" });
@@ -25,4 +41,13 @@ exports.create=function(req, res,next){
 			}
 		
 	}).catch(function(error){next(error)});//Esto se activara si se detecta error fuera de validate (creo)
+};
+
+// POST QUIZES/(quizId)/COMMENTS/(commentId)/PUBLISH
+exports.publish=function(req, res,next){
+	req.comment.publicado = true;
+	
+	req.comment.save( {fields:["publicado"]}).then(function(){
+		res.redirect("/quizes/" + req.params.quizId);
+	}).catch(function(error){next(error)});
 };

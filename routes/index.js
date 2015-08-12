@@ -17,12 +17,15 @@ router.get('/', function (req, res) {
 
 // AUTOLOAD (recoge rutas con parametro quizId)
 router.param("quizId", quizController.load);
-
+// AUTOLOAD COMMENT ( rutas que incluyan commentId)
+router.param("commentId", commentController.load
+  )
+// RUTAS SESION
 //GET  POST DELETE /login/ o logout SESION
 // Enviamos las peticiones a /login/.. a sessionController --> controllers/session_controller.js
 router.get("/login", sessionController.newsession); // formulario login
 router.post("/login", sessionController.create); // crear sesion
-router.delete("/logout", sessionController.destroy); // cerrar sesion
+router.delete("/login", sessionController.destroy); // cerrar sesion
 
 //GET  POST PUT DELETE /quizes/.. PREGUNTAS Y RESPUESTAS
 // Enviamos las peticiones a /quizes/.. a quizController --> controllers/quiz_controller.js
@@ -39,7 +42,8 @@ router.delete("/quizes/:quizId(\\d+)", sessionController.loginRequired, quizCont
 // Enviamos las peticiones a quizes/comment/.. a commentController --> controllers/comment_controller.js
 router.get("/quizes/:quizId(\\d+)/comments/new", commentController.newcomment);
 router.post("/quizes/:quizId(\\d+)/comments", commentController.create);
-
+router.put("/quizes/:quizId(\\d+)/comments/:commentId(\\d+)/publish",
+                sessionController.loginRequired, commentController.publish);
 
 //GET /author CREDITOS
 // Enviamos peticiones get de /author a quizController

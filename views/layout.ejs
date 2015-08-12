@@ -51,7 +51,7 @@
           <div id="log">
              <% if(session.user) {%>
                 <span> <%= session.user.username %> </span>
-                <form method="post" action="/logout?_method=delete">
+                <form method="post" action="/login?_method=delete">
                     <button class="botonComoEnlace" type="submit">
                        Logout
                     </button>

@@ -572,6 +572,17 @@ QUIZ 17 AUTORIZACION
              le añado un min-with porque chrome y explorer la encogen demasiado y el titulo se va del sitio
          Por ahora ok. A ver si dura.... 
          
-
-
-    
+QUIZ 18 PUBLICAR COMENTARIOS
+    Objetivo: Cualquiera puede añadir comentarios, pero no salen en lista hasta que un usuario autentificado los confirme.
+        
+        - Cambio GET /logout para que sea DELETE /logout, como se supone que seria, porque borra la sesión (indicado en el video del mod 6 introquiz)
+        - Añadimos campo en la definicion de la tabla models/comment.js
+        - Añadimos load (autoload) a comment_controller.js despues del autoload de quizes en routes/index.js.
+            Y añadimos la ruta para publicar comentario, que seria PUT y no GET por ser un cambio (UPDATE) en el servidor (concretamente en la tb comment),
+             (como indica el video susodicho)(En la vida habia escrito susodicho...y van dos).
+        - Añadimos tambien a comment_controller.js el controlador para la página de publicar, con controlador de login, para que solo publiquen los usuarios
+              autorizados.
+        - Cambiamos vista de views/quizes/show.ejs para mostrar todos los comentarios si ([coment guadado].publicado es true) O (el usuario se logueo)
+            y, si (es usuario logueado) Y (la propiedad publicado = false), muestre el boton publicar
+        - todo ok, commit, subimos github y pasamos a heroku
+            

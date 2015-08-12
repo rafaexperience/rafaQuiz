@@ -29,7 +29,7 @@ exports.create=function(req,res){
 		console.log("INICIO DE SESION. Reenviando a:" + req.session.redir);
 	});
 };
-// DELETE /logout -- Destruir sesion
+// DELETE /login -- Destruir sesion
 exports.destroy = function(req,res){
 	delete req.session.user;
 	console.log("FIN DE SESION. Reenviando a:" + req.session.redir);
