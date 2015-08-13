@@ -24,7 +24,9 @@ exports.create=function(req,res){
 		//Crear req.session.user y guardar campos id y username
 		// La sesión se define por la existencia de: req.session.user
 		req.session.user = {id: user.id, username:user.username};
-		//redirecciona a path guardado en app.js
+		//redirecciona a path guardado en app.js o a inicio 
+		//si no se paso por middelware de sesion (no hay nada en redir)
+		if(!req.session.redir){req.session.redir="/";}
 		res.redirect(req.session.redir.toString());
 		console.log("INICIO DE SESION. Reenviando a:" + req.session.redir);
 	});

@@ -38,17 +38,19 @@ app.use(logger('dev')); // supongo que dev sera el usuario que crea la pagina
 app.use(bodyParser.json()); //  Analiza el cuerpo de la petición http
 app.use(bodyParser.urlencoded()); // ver final modulo 4. Codifica url's en utf8
 app.use(cookieParser("rafaQuiz2015")); //Gestiona las cookies-param=semilla para codif.
-app.use(session()); // gestión de sesiones
+app.use(session({cookie: { maxAge: 120000 }})); // gestión de sesiones - maxAge=tiempo sesion
 app.use(methodOverride("_method")); // Permite cambiar una peticion http en otra Ej - POST --> DELETE
 app.use(express.static(path.join(__dirname, 'public'))); // devuelve peticiones a recursos que esten en public/
+
 
 // Helpers dinamicos (para sesiones)
 app.use(function(req, res, next){
     console.log("PASO POR HELPER PARA SESION");
+    console.log("TIEMPO SESION: "+ (req.session.cookie.maxAge / 1000)+" segs");
     // guardar path en req.session.redir para volver tras login
     if(!req.path.match(/\/login|\/logout|\/*\.ico/)){
         console.log("MODIFICAMOS REDIR DE " + req.session.redir + " A " + req.path);
-        req.session.redir=req.path; 
+        req.session.redir=req.path || "/"; 
     }
     //Hacer visible req.session en las vistas (en res, mas bien)
     res.locals.session=req.session;

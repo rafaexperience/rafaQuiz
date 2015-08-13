@@ -592,5 +592,31 @@ QUIZ 19 HTTPS - SERVIDOR SEGURO
         - en la herramienta de desarrollador, opcion red, de firefox te indica que hay campos de contraseña en pagina insegura http y te avisa del riesgo.
             Lo comento como curiosidad, que lo acabo de ver al entrar en login. Tanto el usuario como la contraseña salen en el POST, entrando en parámetros.
             Sin embargo en heroku no te avisa, puede que entienda que como esta en https, no enviarias las contraseñas si codificar o algo.
-        - Creo el archivo commands_to_generate_keys.txt y lo ejecuto en el git-bash de windows necesita el archivo /usr/local/ssl/openssl.cnf
+        - Creo el archivo commands_to_generate_keys.txt y lo ejecuto en el git-bash de windows. Necesita el archivo /usr/local/ssl/openssl.cnf.
+            Lo creo en linux, hago archivo ejecutable y lo ejecuto. OK invento datos pedidos. carpeta instalada ok
+        - Añado servidor seguro y acceso a archivos a bin/www
+        - probamos - funciona ok, pero no veo ningun cambio, sigue siendo pagina http y los datos salen en parametros al hacer login. Investigo un poco y 
+            puede que en local no funcione, pruebo a subirlo a heroku (via github), 
+            
+        - no note cambios, de todos modos, en local con foreman, firefox me hacia un cambio cuando cambiaba la direccion con el puerto y me mandaba a internet.
+            ahora sale ok https://localhost:8443/ y me dice que no es seguro (lo cual es normal porque el certificado es autofirmado, "Te lo juro que soy yo")
+           Sin embargo sigo viendo los datos en params del POST, en heroku tampoco parece que cambiara nada, creo que solo afecta a que a los datos "empaquetados
+           para enviar"
+           
+ QUIZ 19+ Ej. Ob. Mod9 - tiempo sesion.
+    
+        - Esta mola. Le añadimos el parametro cookies con el parametro maxAge a mw de sesion en app.js y ya está, le añadi mensaje a consola para comprobar
+            y parece que ok. No es exactamente como pedian, pero funciona (Creo que se puede controlar por cookies o servidor y esto importa si guardas datos grandes)
+            
+QUIZ 19++ EJ. Opc. Mod 9 - Estadisticas
+        OBJETIVO: Añadir página estadisticas. Datos a mostrar
+            - nº preguntas
+            - nº comentarios totales
+            - nº media comentarios/pregunta
+            - nº preguntas sin comentario
+            - nº preguntas con comentario
+        PISTAS:
+            - Crear nuevo controlador para bd y nueva vista
+            
+        - Este mola menos.
         
