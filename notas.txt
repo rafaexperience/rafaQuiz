@@ -619,4 +619,12 @@ QUIZ 19++ EJ. Opc. Mod 9 - Estadisticas
             - Crear nuevo controlador para bd y nueva vista
             
         - Este mola menos.
-        
+ -------- Pensando en la estructura, author no deberia usar el controlador de quiz
+    - Montamos estuctura y luego añadimos lógica
+        - añadimos views/stats/stats.ejs (solo titulos), porque tiene controlador.
+        - añadimos enlace en layour.ejs - <nav>
+        - y ruta en router/index.js y asignamos variable de statsController
+        - Añadimos /controllers/stats_controller que solo monta pagina con lo minimo, titulo y errores 
+        - Hasta aqui todo ok.
+        - Añadimos datos a stats controller con findAll
+
