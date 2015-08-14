@@ -115,22 +115,20 @@ audio {
 #log span,
 #log form,
 #log a {
-     display: inline;}
-.botonComoEnlace, #log a
-
-{
-display: inline;
+     display: inline;
+     
+}
+.botonComoEnlace, #log a{
+            display: inline;
 			color: blue;
 			background: none;
-			margin: 0;
+			margin: 5px;
 			padding: 0;
 			border: none;
 			cursor: pointer;
 			text-decoration: underline;
 			-ms-user-select: text;
-
-
-		}
+}
 		.botonComoEnlace span {
 			text-decoration: underline;
 		}
@@ -173,14 +171,27 @@ display: inline;
 #s1 h3{
     margin:10px auto;
 }
+#f1 {
+    display: flex;
+    align-items: stretch;
+    align-content: space-between;
+}
 #f1 a {
-    margin: 2px 20px;
+    text-align:center;
+    margin: 10px auto;
 }
 
     #f1 a img {
         vertical-align: text-bottom;
     }
 
+#formLog,
+#formLog form,
+#formLog form input
+{
+    font-size: 18px;
+    margin: 10px;
+}
 #formBusqP span,
 #formBusqP input{
     font-size: 17px;

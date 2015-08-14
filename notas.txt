@@ -619,4 +619,41 @@ QUIZ 19++ EJ. Opc. Mod 9 - Estadisticas
             - Crear nuevo controlador para bd y nueva vista
             
         - Este mola menos.
-        
+ -------- Pensando en la estructura, author no deberia usar el controlador de quiz
+    - Montamos estuctura y luego añadimos lógica
+        - añadimos views/stats/stats.ejs (solo titulos), porque tiene controlador.
+        - añadimos enlace en layour.ejs - <nav>
+        - y ruta en router/index.js y asignamos variable de statsController
+        - Añadimos /controllers/stats_controller que solo monta pagina con lo minimo, titulo y errores 
+        - Hasta aqui todo ok.
+        - Necesitamos los campos de quizzes y de Comments, pero no todos los datos, con id´s es suficiente
+        - Metemos datos necesarios en quizstat con findAll. Filtramos los datos necesarios con attributes: ["id"] de quizzes y attributes: ["id","QuizId"]}]
+            Añado algun console.log para ver como salen los datos
+            El objeto quizstat quedaria como array (parece que los comentarios se ordenan al reves, pero nos da igual, para el caso): 
+                    CONTENIDO DE quiz: [
+                                            {"id"      :1,                      pregunta 1: identificador
+                                             "Comments":[                       array de comentarios pregunta 1
+                                                                                        ----COMENTARIO 1
+                                                            {  "id"     :1,         pregunta1 - comentario 1: identificador
+                                                               "QuizId" :1          pregunta1 - comentario 1: identificador relacion con pregunta
+                                                            },                          ----COMENTARIO 2
+                                                            {  "id"     :2,         pregunta1 - comentario 2: identificador
+                                                               "QuizId" :1          pregunta1 - comentario 2: identificador relacion con pregunta
+                                                            }
+                                                         ]
+                                             },
+                                             {"id"      :2,                      pregunta 2: identificador
+                                              "Comments":[     ETC...
+         - pasamos los datos a la vista como un objeto
+         - Acabo de comprobar que los campos de la tabla Comments no se borran cuando se borra el campo asignado de la tabla Quizzes,
+            solo deja vacio el atributo del campo Comments:QuizId 
+            Habria que añadir al quiz_controller una conexion o algo con comment_controller para que tambien borrara esos campos.
+            Para que quede constancia de esto añado una busqueda de todos los campos de Comments, ya que de le forma que lo hize (quiz con include comment)
+            solo muestra los asignados. Salen ambas opciones y si no coinciden muestra un error (en layout).
+         - Iba a comentarlo en los foros, pero ya esta  puesto y con una solucion mejor, haciendo que el modelo ya lo borre en cascada, la añado pero
+            no borro la base de datos, para que se vea el error
+         - modifico el enlace del navegador para que solo se vea si estas logado y le añado loginRequired a la ruta.
+            (se supone que es el administrador quien quiere ver eso, ..o no)
+         - retoco algun css
+         Y YA ESTA... (se puede mejorar, y si fuera algo profesional, se deberia, pero lo que se pide esta ok y se me hecha el tiempo encima)
+         commit, github heroku y a dormir..

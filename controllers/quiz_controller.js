@@ -11,7 +11,7 @@ exports.load = function (req, res, next, quizId) { //(peticion http, respuesta h
                 var descQuiz=JSON.stringify(Object.getOwnPropertyNames(quiz));
                 var QuizContenido=JSON.stringify(quiz);
                 console.log("PROPIEDADES DE (quiz) CARGADO EN AUTOLOAD:"+ descQuiz);
-                console.log("CONTENIDO DE quiz: (PASADO A JSON) "+ QuizContenido);
+                console.log("CONTENIDO DE quiz: "+ QuizContenido);
                 req.quiz = quiz; //lo guarda como req.quiz
                 console.log("CONTENIDO DE REQ.QUIZ: "+ JSON.stringify(req.quiz));
                 next(); //pasa el control a la siguiente funcion(answer o show)

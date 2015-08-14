@@ -40,8 +40,10 @@ exports.Quiz=Quiz;
 var Comment = sequelize.import(path.join(__dirname, "comment"));
 // Indicamos la relación entre "preguntas"(Quiz) y "comentarios" - Una pregunta puede tener varios comentarios
 // Esto añade campo QuizId en comments para relacionarlos 
-Comment.belongsTo(Quiz);
-Quiz.hasMany(Comment)
+//** añado los onDelete para que borre al borrar un quiz, tambien borre los campos relacionados
+// no borro la tabla, asi que puede que no haga efecto
+Comment.belongsTo(Quiz, {onDelete:"cascade"}); //creo que solo con este delete ya valdria
+Quiz.hasMany(Comment, {onDelete:"cascade"});
 //Hacemos visible Comment para el resto del codigo; models/comment.js (module.exports)
 exports.Comment=Comment;
 
